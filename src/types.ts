@@ -1,0 +1,23 @@
+export type CollectionType = 'Private' | 'Grande' | 'Luxury' | 'Femi';
+
+export interface Product {
+  id: string;
+  name: string;
+  price: number;
+  currency: string;
+  category: CollectionType;
+  image: string;
+  description: string;
+  size: string;
+  isNew?: boolean;
+  isSale?: boolean;
+  notes?: {
+    top: string[];
+    heart: string[];
+    base: string[];
+  };
+}
+
+export interface CartItem extends Product {
+  quantity: number;
+}

@@ -1,0 +1,257 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
+import { ArrowRight, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
+import { PRODUCTS } from '../data/products';
+import ProductCard from '../components/ProductCard';
+
+const Home: React.FC = () => {
+  const collections = [
+    { 
+      id: 'Private', 
+      title: 'Private Collection', 
+      desc: 'A masterpiece of refined luxury, crafted for those who seek exclusivity beyond the ordinary. Each fragrance reflects timeless elegance, sophistication, and unmatched distinction.',
+      image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=1200'
+    },
+    { 
+      id: 'Luxury', 
+      title: 'Luxury Collection', 
+      desc: 'Sedra’s premium line for special occasions and memorable moments. Sophisticated, rich, and long-lasting scents that highlight elegance and exclusivity.',
+      image: 'https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=1200'
+    },
+    { 
+      id: 'Grande', 
+      title: 'Grande Collection', 
+      desc: 'Designed for everyday wear. Fresh, versatile, and modern fragrances that suit daily life and any casual setting.',
+      image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=1200'
+    },
+    { 
+      id: 'Femi', 
+      title: 'Femi Collection', 
+      desc: 'A dedicated line for hair and body mists. Light, refreshing, and feminine scents that add a soft touch throughout the day.',
+      image: 'https://images.unsplash.com/photo-1615484477778-ca3b77940c25?auto=format&fit=crop&q=80&w=1200'
+    }
+  ];
+
+  return (
+    <div className="pt-20">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-zinc-900">
+        <motion.div 
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 2, ease: 'easeOut' }}
+          className="absolute inset-0"
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover opacity-60"
+          >
+            <source 
+              src="https://assets.mixkit.co/videos/preview/mixkit-perfume-bottle-in-a-dark-environment-with-smoke-34445-large.mp4" 
+              type="video/mp4" 
+            />
+          </video>
+          {/* Dark overlay for readability */}
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
+        </motion.div>
+
+        <div className="relative z-10 text-center px-6 max-w-5xl text-white">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="mb-8"
+          >
+            <span className="text-[10px] lg:text-xs uppercase tracking-[0.8em] font-bold text-[#D4AF37]">
+              Exclusivity Beyond the Ordinary
+            </span>
+          </motion.div>
+          
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.8, duration: 1.2 }}
+            className="flex flex-col items-center"
+          >
+            <h2 className="text-8xl lg:text-[180px] font-serif mb-4 leading-[0.8] tracking-tight uppercase font-bold text-white">
+              Nero
+            </h2>
+            <h3 className="text-2xl lg:text-4xl font-light text-[#D4AF37] tracking-[0.4em] uppercase mb-12">
+              Grand Collection
+            </h3>
+          </motion.div>
+
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1.1, duration: 1 }}
+            className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8"
+          >
+            <Link to="/shop" className="group relative px-12 py-5 bg-white text-zinc-900 text-[10px] uppercase tracking-[0.3em] font-bold overflow-hidden rounded-full transition-all duration-500 hover:bg-[#D4AF37] hover:text-white">
+              <span className="relative z-10">Explore Collections</span>
+            </Link>
+            <Link to="/about" className="px-12 py-5 border border-white/30 backdrop-blur-sm text-white text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-white hover:text-zinc-900 transition-all duration-500 rounded-full">
+              Our Story
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-4"
+        >
+          <span className="text-[8px] uppercase tracking-[0.4em] text-white/50 font-bold">Scroll</span>
+          <div className="w-px h-12 bg-gradient-to-b from-white/50 to-transparent" />
+        </motion.div>
+      </section>
+
+      {/* Brand Story Block */}
+      <section className="py-32 px-6 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <motion.div 
+            initial={{ x: -50, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="aspect-[4/5] overflow-hidden shadow-2xl">
+              <img 
+                src="https://images.unsplash.com/photo-1557170334-a9632e77c6e4?auto=format&fit=crop&q=80&w=1200" 
+                alt="Sedra Perfumes Story" 
+                className="w-full h-full object-cover transition-transform duration-[2s] hover:scale-110"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <div className="absolute -bottom-12 -left-12 w-72 h-72 bg-amber-50/50 -z-10 hidden lg:block" />
+          </motion.div>
+
+          <motion.div 
+            initial={{ x: 50, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+            <span className="text-[10px] uppercase tracking-[0.6em] text-amber-600 font-bold mb-8 block">About Us</span>
+            <h2 className="text-5xl lg:text-7xl font-serif text-zinc-900 mb-10 leading-[1.1] uppercase tracking-wider">SEDRA <br /> <span className="italic font-light text-zinc-400">PERFUMES</span></h2>
+            <p className="text-zinc-600 leading-relaxed mb-10 text-lg font-light">
+              Sedra is a Kuwaiti luxury fragrance brand that combines oriental richness with modern elegance. The brand creates unique scents designed to reflect personality and leave a lasting impression.
+            </p>
+            <p className="text-zinc-500 leading-relaxed mb-12 font-light">
+              Each fragrance is a masterpiece of refined luxury, crafted for those who seek exclusivity beyond the ordinary. Timeless elegance, sophistication, and unmatched distinction are at the heart of everything we create.
+            </p>
+            <Link to="/about" className="inline-block px-12 py-5 bg-zinc-900 text-white text-[10px] uppercase tracking-[0.3em] font-bold rounded-full hover:bg-amber-600 transition-all duration-500">
+              Discover Our Story
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Collection Sections */}
+      {collections.map((col, idx) => (
+        <section key={col.id} className={`py-32 px-6 ${idx % 2 === 0 ? 'bg-[#FAFAFA]' : 'bg-white'}`}>
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20 items-center">
+              <div className={idx % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}>
+                <motion.span 
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-[10px] uppercase tracking-[0.5em] text-amber-600 font-bold mb-4 block"
+                >
+                  {col.title}
+                </motion.span>
+                <motion.h2 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="text-4xl lg:text-6xl font-serif text-zinc-900 mb-8 uppercase tracking-tight"
+                >
+                  {col.title.split(' ')[0]} <span className="italic font-light text-zinc-400">{col.title.split(' ')[1]}</span>
+                </motion.h2>
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                  className="text-zinc-500 max-w-xl text-base font-light leading-relaxed mb-12"
+                >
+                  {col.desc}
+                </motion.p>
+                <Link to={`/shop?category=${col.id}`} className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 hover:text-amber-600 transition-all border-b border-zinc-200 pb-1 hover:border-amber-600">
+                  Shop {col.title}
+                </Link>
+              </div>
+              <div className={idx % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}>
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1 }}
+                  viewport={{ once: true }}
+                  className="aspect-[16/9] overflow-hidden rounded-2xl shadow-lg"
+                >
+                  <img 
+                    src={col.image} 
+                    alt={col.title} 
+                    className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+                    referrerPolicy="no-referrer"
+                  />
+                </motion.div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+              {PRODUCTS.filter(p => p.category === col.id).slice(0, 4).map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+
+      {/* Trust Badges */}
+      <section className="py-24 px-6 bg-white border-y border-zinc-100">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-16">
+          <div className="flex flex-col items-center text-center space-y-6">
+            <div className="w-20 h-20 bg-zinc-50 rounded-full flex items-center justify-center shadow-sm text-amber-600 border border-zinc-100">
+              <Truck size={28} strokeWidth={1} />
+            </div>
+            <div>
+              <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 mb-2">Free Worldwide Shipping</h4>
+              <p className="text-[10px] text-zinc-400 uppercase tracking-widest">On all orders over 50 KWD</p>
+            </div>
+          </div>
+          <div className="flex flex-col items-center text-center space-y-6">
+            <div className="w-20 h-20 bg-zinc-50 rounded-full flex items-center justify-center shadow-sm text-amber-600 border border-zinc-100">
+              <ShieldCheck size={28} strokeWidth={1} />
+            </div>
+            <div>
+              <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 mb-2">Secure Payments</h4>
+              <p className="text-[10px] text-zinc-400 uppercase tracking-widest">100% secure payment processing</p>
+            </div>
+          </div>
+          <div className="flex flex-col items-center text-center space-y-6">
+            <div className="w-20 h-20 bg-zinc-50 rounded-full flex items-center justify-center shadow-sm text-amber-600 border border-zinc-100">
+              <RotateCcw size={28} strokeWidth={1} />
+            </div>
+            <div>
+              <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 mb-2">Easy Returns</h4>
+              <p className="text-[10px] text-zinc-400 uppercase tracking-widest">14-day money back guarantee</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Home;
