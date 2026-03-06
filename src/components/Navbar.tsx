@@ -98,20 +98,33 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
-            initial={{ x: '-100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '-100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-white z-[60] p-8 flex flex-col overflow-y-auto"
-          >
-            <div className="flex justify-between items-center mb-12">
+          <>
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[55]"
+            />
+            
+            <motion.div 
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="fixed inset-y-0 right-0 w-full sm:w-80 bg-white z-[60] p-8 flex flex-col overflow-y-auto shadow-2xl"
+            >
+            <div className="flex justify-between items-center mb-16">
               <div className="flex flex-col">
                 <h1 className="text-xl font-serif tracking-[0.3em] uppercase font-light text-zinc-900">Sedra</h1>
                 <span className="text-[8px] uppercase tracking-[0.4em] text-zinc-500 -mt-1">Perfumes</span>
               </div>
-              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-zinc-900">
-                <X size={32} />
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="w-12 h-12 rounded-full bg-zinc-50 flex items-center justify-center text-zinc-900 hover:bg-amber-600 hover:text-white transition-all duration-300 shadow-sm border border-zinc-100"
+              >
+                <X size={24} strokeWidth={1.5} />
               </button>
             </div>
             <div className="flex flex-col space-y-6">
@@ -126,9 +139,10 @@ const Navbar: React.FC = () => {
               ))}
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+        </>
+      )}
+    </AnimatePresence>
+  </nav>
   );
 };
 
