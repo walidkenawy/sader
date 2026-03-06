@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ShoppingBag, Heart, Share2, ChevronRight, Minus, Plus, Star, ShieldCheck, Truck, RotateCcw, Wind, Trees } from 'lucide-react';
+import { ShoppingBag, Heart, Share2, ChevronRight, Minus, Plus, Star, ShieldCheck, Truck, RotateCcw, Wind, Trees, Facebook, Twitter, MessageCircle } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -36,6 +36,15 @@ const ProductDetail: React.FC = () => {
     PRODUCTS.filter(p => p.category === product?.category && p.id !== id).slice(0, 4),
     [product, id]
   );
+
+  const shareUrl = window.location.href;
+  const shareText = `Check out ${product.name} at Sedra Perfumes!`;
+
+  const shareLinks = [
+    { icon: <Facebook size={18} />, label: 'Facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}` },
+    { icon: <Twitter size={18} />, label: 'Twitter', url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}` },
+    { icon: <MessageCircle size={18} />, label: 'WhatsApp', url: `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}` },
+  ];
 
   if (!product) {
     return (
@@ -144,7 +153,7 @@ const ProductDetail: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-6 mb-16">
+            <div className="flex flex-col sm:flex-row gap-6 mb-12">
               <button 
                 onClick={() => addToCart(product)}
                 className="flex-1 py-6 bg-zinc-900 text-white text-[10px] uppercase tracking-[0.4em] font-bold shadow-xl hover:bg-amber-600 transition-all duration-500 flex items-center justify-center space-x-4"
@@ -162,6 +171,25 @@ const ProductDetail: React.FC = () => {
               >
                 <Heart size={20} fill={isWishlisted ? "currentColor" : "none"} strokeWidth={isWishlisted ? 0 : 1.5} />
               </button>
+            </div>
+
+            {/* Social Sharing Section */}
+            <div className="flex items-center space-x-6 mb-16 py-6 border-y border-zinc-50">
+              <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400">Share this product</span>
+              <div className="flex items-center gap-4">
+                {shareLinks.map((link, idx) => (
+                  <a 
+                    key={idx}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center rounded-full border border-zinc-100 text-zinc-400 hover:text-amber-600 hover:border-amber-200 hover:bg-amber-50/30 transition-all duration-300"
+                    title={link.label}
+                  >
+                    {link.icon}
+                  </a>
+                ))}
+              </div>
             </div>
 
             {/* Trust Badges Mini */}

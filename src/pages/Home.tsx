@@ -51,7 +51,7 @@ const Home: React.FC = () => {
             className="w-full h-full object-cover opacity-60"
           >
             <source 
-              src="https://assets.mixkit.co/videos/preview/mixkit-perfume-bottle-in-a-dark-environment-with-smoke-34445-large.mp4" 
+              src="/video_0.mp4" 
               type="video/mp4" 
             />
           </video>
@@ -123,13 +123,19 @@ const Home: React.FC = () => {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="aspect-[4/5] overflow-hidden shadow-2xl">
-              <img 
-                src="https://images.unsplash.com/photo-1557170334-a9632e77c6e4?auto=format&fit=crop&q=80&w=1200" 
-                alt="Sedra Perfumes Story" 
-                className="w-full h-full object-cover transition-transform duration-[2s] hover:scale-110"
-                referrerPolicy="no-referrer"
-              />
+            <div className="aspect-[4/5] overflow-hidden shadow-2xl bg-white flex items-center justify-center">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-contain p-8 transition-transform duration-[2s] hover:scale-110"
+              >
+                <source 
+                  src="/video_0.mp4" 
+                  type="video/mp4" 
+                />
+              </video>
             </div>
             <div className="absolute -bottom-12 -left-12 w-72 h-72 bg-amber-50/50 -z-10 hidden lg:block" />
           </motion.div>
