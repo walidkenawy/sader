@@ -9,6 +9,7 @@ import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ChatBot from './components/ChatBot';
 import AnnouncementBar from './components/AnnouncementBar';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
@@ -56,6 +57,7 @@ export default function App() {
             </main>
   
             <Footer />
+            <ChatBot />
           </div>
         </CartProvider>
       </WishlistProvider>

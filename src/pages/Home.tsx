@@ -218,70 +218,45 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 1 }}
                   viewport={{ once: true }}
-                  className="relative aspect-[16/9] overflow-hidden rounded-2xl shadow-lg bg-zinc-900 group"
+                  className="space-y-4"
                 >
                   {col.videos ? (
-                    <>
-                      <AnimatePresence mode="wait">
-                        <motion.video
-                          key={col.videos[currentPrivateVideo]}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.5 }}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className="w-full h-full object-cover"
-                        >
-                          <source src={col.videos[currentPrivateVideo]} type="video/mp4" />
-                        </motion.video>
-                      </AnimatePresence>
-                      
-                      {/* Carousel Controls */}
-                      <div className="absolute inset-x-0 bottom-6 flex justify-center space-x-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button 
-                          onClick={prevVideo}
-                          className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-amber-600 transition-colors"
-                        >
-                          <ChevronLeft size={20} />
-                        </button>
-                        <button 
-                          onClick={nextVideo}
-                          className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-amber-600 transition-colors"
-                        >
-                          <ChevronRight size={20} />
-                        </button>
-                      </div>
-
-                      {/* Indicators */}
-                      <div className="absolute bottom-6 right-8 flex space-x-2 z-20">
-                        {col.videos.map((_, i) => (
-                          <div 
-                            key={i}
-                            className={`h-1 transition-all duration-500 ${i === currentPrivateVideo ? 'w-8 bg-amber-500' : 'w-2 bg-white/30'}`}
-                          />
-                        ))}
-                      </div>
-                    </>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {col.videos.map((v, vIdx) => (
+                        <div key={vIdx} className={`relative overflow-hidden rounded-2xl shadow-lg bg-zinc-900 aspect-video ${vIdx === 0 ? 'sm:col-span-2' : ''}`}>
+                          <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+                          >
+                            <source src={v} type="video/mp4" />
+                          </video>
+                        </div>
+                      ))}
+                    </div>
                   ) : col.video ? (
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
-                    >
-                      <source src={col.video} type="video/mp4" />
-                    </video>
+                    <div className="relative aspect-[16/9] overflow-hidden rounded-2xl shadow-lg bg-zinc-900">
+                      <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+                      >
+                        <source src={col.video} type="video/mp4" />
+                      </video>
+                    </div>
                   ) : (
-                    <img 
-                      src={col.image} 
-                      alt={col.title} 
-                      className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
-                      referrerPolicy="no-referrer"
-                    />
+                    <div className="relative aspect-[16/9] overflow-hidden rounded-2xl shadow-lg bg-zinc-900">
+                      <img 
+                        src={col.image} 
+                        alt={col.title} 
+                        className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
                   )}
                 </motion.div>
               </div>
@@ -354,6 +329,64 @@ const Home: React.FC = () => {
               <div className="absolute -top-12 -right-12 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -z-10" />
               <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-zinc-500/10 rounded-full blur-3xl -z-10" />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cinematic Wall Section */}
+      <section className="py-32 px-6 bg-zinc-900 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <motion.span 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-[10px] uppercase tracking-[0.8em] text-amber-500 font-bold mb-6 block"
+            >
+              The Full Vision
+            </motion.span>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-5xl lg:text-7xl font-serif text-white mb-8 uppercase tracking-tight"
+            >
+              Cinematic <span className="italic font-light text-zinc-500">Wall</span>
+            </motion.h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((id) => (
+              <motion.div
+                key={id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: id * 0.05 }}
+                className="relative aspect-square overflow-hidden rounded-lg bg-zinc-800 group"
+              >
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"
+                >
+                  <source src={`/video_${id}.mp4`} type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
+                  <span className="text-[8px] uppercase tracking-widest text-white font-bold">Scene {id + 1}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="mt-16 text-center">
+            <Link to="/cinematics" className="inline-flex items-center space-x-4 text-[10px] uppercase tracking-[0.4em] font-bold text-amber-500 hover:text-white transition-all">
+              <span>View Full Gallery</span>
+              <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>
