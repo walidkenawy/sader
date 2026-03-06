@@ -11,25 +11,29 @@ const Home: React.FC = () => {
       id: 'Private', 
       title: 'Private Collection', 
       desc: 'A masterpiece of refined luxury, crafted for those who seek exclusivity beyond the ordinary. Each fragrance reflects timeless elegance, sophistication, and unmatched distinction.',
-      image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=1200'
+      image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=1200',
+      video: '/video_1.mp4'
     },
     { 
       id: 'Luxury', 
       title: 'Luxury Collection', 
       desc: 'Sedra’s premium line for special occasions and memorable moments. Sophisticated, rich, and long-lasting scents that highlight elegance and exclusivity.',
-      image: 'https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=1200'
+      image: 'https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=1200',
+      video: '/video_5.mp4'
     },
     { 
       id: 'Grande', 
       title: 'Grande Collection', 
       desc: 'Designed for everyday wear. Fresh, versatile, and modern fragrances that suit daily life and any casual setting.',
-      image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=1200'
+      image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=1200',
+      video: '/video_3.mp4'
     },
     { 
       id: 'Femi', 
       title: 'Femi Collection', 
       desc: 'A dedicated line for hair and body mists. Light, refreshing, and feminine scents that add a soft touch throughout the day.',
-      image: 'https://images.unsplash.com/photo-1615484477778-ca3b77940c25?auto=format&fit=crop&q=80&w=1200'
+      image: 'https://images.unsplash.com/photo-1615484477778-ca3b77940c25?auto=format&fit=crop&q=80&w=1200',
+      video: '/video_4.mp4'
     }
   ];
 
@@ -132,7 +136,7 @@ const Home: React.FC = () => {
                 className="w-full h-full object-contain p-8 transition-transform duration-[2s] hover:scale-110"
               >
                 <source 
-                  src="/video_0.mp4" 
+                  src="/video_8.mp4" 
                   type="video/mp4" 
                 />
               </video>
@@ -203,14 +207,26 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 1 }}
                   viewport={{ once: true }}
-                  className="aspect-[16/9] overflow-hidden rounded-2xl shadow-lg"
+                  className="aspect-[16/9] overflow-hidden rounded-2xl shadow-lg bg-zinc-900"
                 >
-                  <img 
-                    src={col.image} 
-                    alt={col.title} 
-                    className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
-                    referrerPolicy="no-referrer"
-                  />
+                  {col.video ? (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+                    >
+                      <source src={col.video} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <img 
+                      src={col.image} 
+                      alt={col.title} 
+                      className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+                      referrerPolicy="no-referrer"
+                    />
+                  )}
                 </motion.div>
               </div>
             </div>
