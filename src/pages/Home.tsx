@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
-import { ArrowRight, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowRight, ShieldCheck, Truck, RotateCcw, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import ProductCard from '../components/ProductCard';
 
 const Home: React.FC = () => {
+  const [currentPrivateVideo, setCurrentPrivateVideo] = useState(0);
+  const privateVideos = ['/video_9.mp4', '/video_1.mp4', '/video_2.mp4'];
+
+  const nextVideo = () => setCurrentPrivateVideo((prev) => (prev + 1) % privateVideos.length);
+  const prevVideo = () => setCurrentPrivateVideo((prev) => (prev - 1 + privateVideos.length) % privateVideos.length);
+
+  useEffect(() => {
+    const timer = setInterval(nextVideo, 8000); // Change video every 8 seconds
+    return () => clearInterval(timer);
+  }, []);
+
   const collections = [
     { 
       id: 'Private', 
       title: 'Private Collection', 
       desc: 'A masterpiece of refined luxury, crafted for those who seek exclusivity beyond the ordinary. Each fragrance reflects timeless elegance, sophistication, and unmatched distinction.',
       image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=1200',
-      video: '/video_1.mp4'
+      videos: privateVideos
     },
     { 
       id: 'Luxury', 
@@ -207,9 +218,54 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 1 }}
                   viewport={{ once: true }}
-                  className="aspect-[16/9] overflow-hidden rounded-2xl shadow-lg bg-zinc-900"
+                  className="relative aspect-[16/9] overflow-hidden rounded-2xl shadow-lg bg-zinc-900 group"
                 >
-                  {col.video ? (
+                  {col.videos ? (
+                    <>
+                      <AnimatePresence mode="wait">
+                        <motion.video
+                          key={col.videos[currentPrivateVideo]}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-cover"
+                        >
+                          <source src={col.videos[currentPrivateVideo]} type="video/mp4" />
+                        </motion.video>
+                      </AnimatePresence>
+                      
+                      {/* Carousel Controls */}
+                      <div className="absolute inset-x-0 bottom-6 flex justify-center space-x-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button 
+                          onClick={prevVideo}
+                          className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-amber-600 transition-colors"
+                        >
+                          <ChevronLeft size={20} />
+                        </button>
+                        <button 
+                          onClick={nextVideo}
+                          className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-amber-600 transition-colors"
+                        >
+                          <ChevronRight size={20} />
+                        </button>
+                      </div>
+
+                      {/* Indicators */}
+                      <div className="absolute bottom-6 right-8 flex space-x-2 z-20">
+                        {col.videos.map((_, i) => (
+                          <div 
+                            key={i}
+                            className={`h-1 transition-all duration-500 ${i === currentPrivateVideo ? 'w-8 bg-amber-500' : 'w-2 bg-white/30'}`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  ) : col.video ? (
                     <video
                       autoPlay
                       loop
@@ -239,6 +295,68 @@ const Home: React.FC = () => {
           </div>
         </section>
       ))}
+
+      {/* Cinematics Teaser */}
+      <section className="py-32 px-6 bg-zinc-950 text-white overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="lg:w-1/2">
+              <motion.span 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-[10px] uppercase tracking-[0.8em] text-amber-500 font-bold mb-8 block"
+              >
+                The Art of Scent
+              </motion.span>
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-5xl lg:text-7xl font-serif mb-10 uppercase tracking-tight leading-[1.1]"
+              >
+                Cinematic <br /> <span className="italic font-light text-zinc-500">Vision</span>
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="text-zinc-400 max-w-xl text-lg font-light leading-relaxed mb-12"
+              >
+                Experience the soul of Sedra through our cinematic gallery. From the initial design sketches to the final 3D masterpieces, witness the journey of luxury.
+              </motion.p>
+              <Link to="/cinematics" className="group inline-flex items-center space-x-4 text-[10px] uppercase tracking-[0.4em] font-bold text-white hover:text-amber-500 transition-all">
+                <span>Explore the Gallery</span>
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-2" />
+              </Link>
+            </div>
+            <div className="lg:w-1/2 relative">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.5 }}
+                viewport={{ once: true }}
+                className="relative z-10 aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+              >
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                >
+                  <source src="/video_8.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </motion.div>
+              <div className="absolute -top-12 -right-12 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -z-10" />
+              <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-zinc-500/10 rounded-full blur-3xl -z-10" />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Trust Badges */}
       <section className="py-24 px-6 bg-white border-y border-zinc-100">

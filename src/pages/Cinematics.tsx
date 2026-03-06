@@ -12,6 +12,7 @@ const Cinematics: React.FC = () => {
     { id: 6, title: 'Design Concept I', desc: 'Initial design sketches and wireframes for the Sedra brand.', src: '/video_6.mp4' },
     { id: 7, title: 'Design Concept II', desc: 'Detailed wireframe exploration of bottle geometry.', src: '/video_7.mp4' },
     { id: 8, title: 'Design Concept III', desc: 'Final design process and brand identity visualization.', src: '/video_8.mp4' },
+    { id: 9, title: 'Private Collection Showcase', desc: 'An elegant showcase of the Private Collection bottles on reflective surfaces.', src: '/video_9.mp4' },
   ];
 
   return (

@@ -17,6 +17,7 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Wishlist from './pages/Wishlist';
 import Cinematics from './pages/Cinematics';
+import Contact from './pages/Contact';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -48,8 +49,8 @@ export default function App() {
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/cinematics" element={<Cinematics />} />
+                <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<div className="pt-40 pb-24 text-center px-6"><h1 className="text-4xl font-serif mb-8">Our Story</h1><p className="max-w-2xl mx-auto text-zinc-500 leading-relaxed">Sedra Perfumes is a luxury fragrance brand from Kuwait dedicated to the art of scent. Each fragrance is a masterpiece of refined luxury, crafted for those who seek exclusivity beyond the ordinary.</p></div>} />
-                <Route path="/contact" element={<div className="pt-40 pb-24 text-center px-6"><h1 className="text-4xl font-serif mb-8">Contact Us</h1><p className="max-w-2xl mx-auto text-zinc-500 leading-relaxed">Have a question? We'd love to hear from you. Reach out to us at info@sedraperfumes.com or visit our flagship store in Kuwait.</p></div>} />
               </Routes>
             </main>
   

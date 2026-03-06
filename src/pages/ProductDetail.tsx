@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ShoppingBag, Heart, Share2, ChevronRight, Minus, Plus, Star, ShieldCheck, Truck, RotateCcw, Wind, Trees, Facebook, Twitter, MessageCircle } from 'lucide-react';
+import { ShoppingBag, Heart, Share2, ChevronRight, Minus, Plus, Star, ShieldCheck, Truck, RotateCcw, Wind, Trees, Leaf, Facebook, Twitter, MessageCircle } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -252,12 +252,29 @@ const ProductDetail: React.FC = () => {
                   exit={{ opacity: 0, y: -10 }}
                   className="text-zinc-500 leading-relaxed text-lg"
                 >
-                  <p className="mb-6">
-                    Sedra is a luxury fragrance brand that combines oriental richness with modern elegance. The brand creates unique scents designed to reflect personality and leave a lasting impression.
+                  <p className="mb-12">
+                    {product.description}
                   </p>
-                  <p>
-                    Each fragrance is a masterpiece of refined luxury, crafted for those who seek exclusivity beyond the ordinary. Timeless elegance, sophistication, and unmatched distinction are at the heart of everything we create.
-                  </p>
+                  
+                  {product.notes && (
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 pt-12 border-t border-zinc-100">
+                      <ScentNote 
+                        label="Top Notes" 
+                        notes={product.notes.top} 
+                        icon={<Wind size={20} strokeWidth={1} />} 
+                      />
+                      <ScentNote 
+                        label="Heart Notes" 
+                        notes={product.notes.heart} 
+                        icon={<Leaf size={20} strokeWidth={1} />} 
+                      />
+                      <ScentNote 
+                        label="Base Notes" 
+                        notes={product.notes.base} 
+                        icon={<Trees size={20} strokeWidth={1} />} 
+                      />
+                    </div>
+                  )}
                 </motion.div>
               )}
               {activeTab === 'shipping' && (
