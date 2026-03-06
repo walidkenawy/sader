@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, MapPin, Phone, Mail, MessageCircle } from 'lucide-react';
+import { Instagram, Facebook, Twitter, MapPin, Phone, Mail, MessageCircle } from 'lucide-react';
 
 const TikTokIcon = ({ size = 18 }: { size?: number }) => (
   <svg 
@@ -57,6 +57,12 @@ const Footer: React.FC = () => {
               <a href="https://www.instagram.com/sedraperfumes" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
                 <Instagram size={18} strokeWidth={1.5} />
               </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
+                <Facebook size={18} strokeWidth={1.5} />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
+                <Twitter size={18} strokeWidth={1.5} />
+              </a>
               <a href="https://www.tiktok.com/@sedraperfumeskw" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
                 <TikTokIcon size={18} />
               </a>
@@ -112,10 +118,14 @@ const Footer: React.FC = () => {
           <p className="text-[8px] uppercase tracking-[0.5em] text-zinc-600 font-bold">
             © {new Date().getFullYear()} Sedra Perfumes. All Rights Reserved.
           </p>
-          <div className="flex items-center space-x-8">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-2.5 opacity-20 grayscale" referrerPolicy="no-referrer" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-5 opacity-20 grayscale" referrerPolicy="no-referrer" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-3.5 opacity-20 grayscale" referrerPolicy="no-referrer" />
+          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_logo%2C_revised_2016.svg" alt="Stripe" className="h-4 opacity-40 grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-3 opacity-40 grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-6 opacity-40 grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="Amex" className="h-4 opacity-40 grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Discover_Card_logo.svg" alt="Discover" className="h-3 opacity-40 grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-4 opacity-40 grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-4 opacity-40 grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
           </div>
         </div>
       </div>

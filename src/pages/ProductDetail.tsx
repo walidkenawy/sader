@@ -33,7 +33,7 @@ const ProductDetail: React.FC = () => {
   const product = useMemo(() => PRODUCTS.find(p => p.id === id), [id]);
   const isWishlisted = product ? isInWishlist(product.id) : false;
   const relatedProducts = useMemo(() => 
-    PRODUCTS.filter(p => p.category === product?.category && p.id !== id).slice(0, 4),
+    PRODUCTS.filter(p => p.category === product?.category && p.id !== id).slice(0, 8),
     [product, id]
   );
 
@@ -71,21 +71,21 @@ const ProductDetail: React.FC = () => {
           <span className="text-zinc-900">{product.name}</span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-32">
+        <div className="grid grid-cols-2 gap-6 sm:gap-12 lg:gap-24 mb-32">
           {/* Gallery */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="aspect-[4/5] bg-[#F9F9F9] overflow-hidden flex items-center justify-center relative"
+            className="aspect-[4/5] bg-[#F9F9F9] overflow-hidden flex items-center justify-center relative rounded-2xl"
           >
             <img 
               src={product.image} 
               alt={product.name} 
-              className="max-h-[80%] object-contain transition-transform duration-[2s] hover:scale-110"
+              className="max-h-[85%] object-contain transition-transform duration-[2s] hover:scale-110"
               referrerPolicy="no-referrer"
             />
             {product.isNew && (
-              <span className="absolute top-10 left-10 bg-zinc-900 text-white text-[8px] uppercase tracking-[0.4em] px-5 py-2 font-bold">New Arrival</span>
+              <span className="absolute top-4 left-4 sm:top-10 sm:left-10 bg-zinc-900 text-white text-[6px] sm:text-[8px] uppercase tracking-[0.4em] px-3 py-1.5 sm:px-5 sm:py-2 font-bold">New Arrival</span>
             )}
           </motion.div>
 
@@ -95,95 +95,95 @@ const ProductDetail: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             className="flex flex-col justify-center"
           >
-            <span className="text-[10px] uppercase tracking-[0.5em] text-amber-600 font-bold mb-6">{product.category} Collection</span>
-            <h1 className="text-5xl lg:text-7xl font-serif text-zinc-900 mb-8 leading-tight tracking-tight">{product.name}</h1>
+            <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.5em] text-amber-600 font-bold mb-4 sm:mb-6">{product.category} Collection</span>
+            <h1 className="text-xl sm:text-3xl lg:text-7xl font-serif text-zinc-900 mb-4 sm:mb-8 leading-tight tracking-tight uppercase">{product.name}</h1>
             
-            <div className="flex items-center space-x-6 mb-10">
+            <div className="flex items-center space-x-3 sm:space-x-6 mb-6 sm:mb-10">
               <div className="flex items-center text-amber-500">
-                {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                {[...Array(5)].map((_, i) => <Star key={i} size={10} className="sm:w-[14px] sm:h-[14px]" fill="currentColor" />)}
               </div>
-              <span className="text-[10px] text-zinc-400 uppercase tracking-[0.2em] font-bold">12 Reviews</span>
+              <span className="text-[8px] sm:text-[10px] text-zinc-400 uppercase tracking-[0.2em] font-bold">12 Reviews</span>
             </div>
 
-            <div className="text-3xl font-light text-zinc-900 mb-10 tracking-widest">
+            <div className="text-lg sm:text-2xl lg:text-3xl font-light text-zinc-900 mb-6 sm:mb-10 tracking-widest">
               {product.price.toFixed(3)} {product.currency}
             </div>
 
-            <p className="text-zinc-500 leading-relaxed text-lg mb-12 font-light">
+            <p className="text-zinc-500 leading-relaxed text-xs sm:text-lg mb-8 sm:mb-12 font-light line-clamp-3 sm:line-clamp-none">
               {product.description}
             </p>
 
             {/* Scent Profile Quick View */}
             {product.notes && (
-              <div className="mb-16 p-8 bg-[#F9F9F9] border border-zinc-100 rounded-2xl">
-                <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-zinc-400 mb-8">Scent Profile</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              <div className="mb-10 sm:mb-16 p-4 sm:p-8 bg-[#F9F9F9] border border-zinc-100 rounded-2xl">
+                <h3 className="text-[8px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.4em] font-bold text-zinc-400 mb-4 sm:mb-8">Scent Profile</h3>
+                <div className="grid grid-cols-1 gap-6 sm:gap-10">
                   <ScentNote 
                     label="Top Notes" 
                     notes={product.notes.top} 
-                    icon={<Wind size={16} strokeWidth={1.5} />} 
+                    icon={<Wind size={14} className="sm:w-[16px] sm:h-[16px]" strokeWidth={1.5} />} 
                   />
                   <ScentNote 
                     label="Heart Notes" 
                     notes={product.notes.heart} 
-                    icon={<Heart size={16} strokeWidth={1.5} />} 
+                    icon={<Heart size={14} className="sm:w-[16px] sm:h-[16px]" strokeWidth={1.5} />} 
                   />
                   <ScentNote 
                     label="Base Notes" 
                     notes={product.notes.base} 
-                    icon={<Trees size={16} strokeWidth={1.5} />} 
+                    icon={<Trees size={14} className="sm:w-[16px] sm:h-[16px]" strokeWidth={1.5} />} 
                   />
                 </div>
               </div>
             )}
 
-            <div className="flex flex-col space-y-10 mb-16">
-              <div className="flex items-center space-x-8">
-                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Size</span>
-                <span className="px-8 py-2.5 border border-zinc-900 text-[10px] uppercase tracking-widest font-bold text-zinc-900">{product.size}</span>
+            <div className="flex flex-col space-y-6 sm:space-y-10 mb-10 sm:mb-16">
+              <div className="flex items-center space-x-4 sm:space-x-8">
+                <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] font-bold text-zinc-400">Size</span>
+                <span className="px-4 sm:px-8 py-1.5 sm:py-2.5 border border-zinc-900 text-[8px] sm:text-[10px] uppercase tracking-widest font-bold text-zinc-900">{product.size}</span>
               </div>
 
-              <div className="flex items-center space-x-8">
-                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Quantity</span>
-                <div className="flex items-center border border-zinc-100 px-6 py-2.5">
-                  <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="p-2 text-zinc-400 hover:text-zinc-900 transition-colors"><Minus size={14} /></button>
-                  <span className="w-16 text-center font-bold text-zinc-900 text-sm">{quantity}</span>
-                  <button onClick={() => setQuantity(quantity + 1)} className="p-2 text-zinc-400 hover:text-zinc-900 transition-colors"><Plus size={14} /></button>
+              <div className="flex items-center space-x-4 sm:space-x-8">
+                <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] font-bold text-zinc-400">Quantity</span>
+                <div className="flex items-center border border-zinc-100 px-3 sm:px-6 py-1.5 sm:py-2.5">
+                  <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="p-1 sm:p-2 text-zinc-400 hover:text-zinc-900 transition-colors"><Minus size={12} /></button>
+                  <span className="w-8 sm:w-16 text-center font-bold text-zinc-900 text-xs sm:text-sm">{quantity}</span>
+                  <button onClick={() => setQuantity(quantity + 1)} className="p-1 sm:p-2 text-zinc-400 hover:text-zinc-900 transition-colors"><Plus size={12} /></button>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-6 mb-12">
+            <div className="flex flex-col gap-4 sm:gap-6 mb-10 sm:mb-12">
               <button 
                 onClick={() => addToCart(product)}
-                className="flex-1 py-6 bg-zinc-900 text-white text-[10px] uppercase tracking-[0.4em] font-bold shadow-xl hover:bg-amber-600 transition-all duration-500 flex items-center justify-center space-x-4"
+                className="flex-1 py-4 sm:py-6 bg-zinc-900 text-white text-[8px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.4em] font-bold shadow-xl hover:bg-amber-600 transition-all duration-500 flex items-center justify-center space-x-2 sm:space-x-4"
               >
-                <ShoppingBag size={18} />
+                <ShoppingBag size={16} className="sm:w-[18px] sm:h-[18px]" />
                 <span>Add to Cart</span>
               </button>
               <button 
                 onClick={() => toggleWishlist(product)}
-                className={`p-6 border transition-all duration-500 ${
+                className={`py-4 sm:py-6 px-6 sm:px-10 border transition-all duration-500 flex items-center justify-center ${
                   isWishlisted 
                     ? 'bg-amber-600 border-amber-600 text-white shadow-lg' 
                     : 'border-zinc-100 text-zinc-400 hover:text-amber-600 hover:border-amber-100'
                 }`}
               >
-                <Heart size={20} fill={isWishlisted ? "currentColor" : "none"} strokeWidth={isWishlisted ? 0 : 1.5} />
+                <Heart size={18} className="sm:w-[20px] sm:h-[20px]" fill={isWishlisted ? "currentColor" : "none"} strokeWidth={isWishlisted ? 0 : 1.5} />
               </button>
             </div>
 
             {/* Social Sharing Section */}
-            <div className="flex items-center space-x-6 mb-16 py-6 border-y border-zinc-50">
-              <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400">Share this product</span>
-              <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:space-x-6 mb-16 py-4 sm:py-6 border-y border-zinc-50">
+              <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.2em] font-bold text-zinc-400">Share this product</span>
+              <div className="flex items-center gap-3 sm:gap-4">
                 {shareLinks.map((link, idx) => (
                   <a 
                     key={idx}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center rounded-full border border-zinc-100 text-zinc-400 hover:text-amber-600 hover:border-amber-200 hover:bg-amber-50/30 transition-all duration-300"
+                    className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border border-zinc-100 text-zinc-400 hover:text-amber-600 hover:border-amber-200 hover:bg-amber-50/30 transition-all duration-300"
                     title={link.label}
                   >
                     {link.icon}
@@ -209,6 +209,23 @@ const ProductDetail: React.FC = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Related Products Carousel */}
+        {relatedProducts.length > 0 && (
+          <div className="mb-24">
+            <div className="flex items-center justify-between mb-12">
+              <h2 className="text-3xl font-serif text-zinc-900 uppercase tracking-tight">Related <span className="italic font-light text-zinc-400">Products</span></h2>
+              <Link to={`/shop?category=${product.category}`} className="text-[10px] uppercase tracking-widest font-bold text-zinc-900 hover:text-amber-600 transition-colors border-b border-zinc-900 pb-1">View All</Link>
+            </div>
+            <div className="flex space-x-8 overflow-x-auto pb-12 no-scrollbar snap-x snap-mandatory">
+              {relatedProducts.map(p => (
+                <div key={p.id} className="min-w-[280px] sm:min-w-[320px] lg:min-w-[calc(25%-24px)] snap-start">
+                  <ProductCard product={p} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Tabs */}
         <div className="mb-24">
@@ -270,19 +287,6 @@ const ProductDetail: React.FC = () => {
             </AnimatePresence>
           </div>
         </div>
-
-        {/* Related Products */}
-        {relatedProducts.length > 0 && (
-          <div>
-            <div className="flex items-center justify-between mb-12">
-              <h2 className="text-3xl font-serif text-zinc-900">Related <span className="italic font-light text-zinc-400">Products</span></h2>
-              <Link to="/shop" className="text-[10px] uppercase tracking-widest font-bold text-zinc-900 hover:text-amber-600 transition-colors">View All</Link>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {relatedProducts.map(p => <ProductCard key={p.id} product={p} />)}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
