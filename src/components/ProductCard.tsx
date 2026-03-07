@@ -35,31 +35,31 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         viewport={{ once: true }}
         className="group"
       >
-        <div className="relative aspect-[4/5] bg-[#F9F9F9] overflow-hidden mb-6 flex items-center justify-center transition-all duration-700">
-          <Link to={`/product/${product.id}`} className="w-full h-full flex items-center justify-center p-8 sm:p-12">
+        <div className="relative aspect-[4/5] bg-[#F9F9F9] overflow-hidden mb-8 flex items-center justify-center transition-all duration-700 rounded-2xl group-hover:shadow-2xl group-hover:shadow-zinc-200/50 group-hover:-translate-y-1">
+          <Link to={`/product/${product.id}`} className="w-full h-full flex items-center justify-center p-10 sm:p-14">
             <img 
               src={product.image} 
               alt={product.name} 
-              className="max-h-full object-contain transition-transform duration-1000 group-hover:scale-105"
+              className="max-h-full object-contain transition-transform duration-1000 group-hover:scale-110"
               referrerPolicy="no-referrer"
             />
           </Link>
           
           {/* Share Button */}
-          <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
+          <div className="absolute top-5 left-5 z-10 flex flex-col gap-3">
             <div className="relative">
               <button 
                 onClick={(e) => {
                   e.preventDefault();
                   setIsShareOpen(!isShareOpen);
                 }}
-                className={`p-2.5 rounded-full transition-all duration-500 ${
+                className={`p-3 rounded-full transition-all duration-500 ${
                   isShareOpen 
                     ? 'bg-zinc-900 text-white shadow-lg' 
-                    : 'bg-white/80 backdrop-blur-sm text-zinc-400 hover:text-zinc-900 hover:bg-white shadow-sm'
+                    : 'bg-white/90 backdrop-blur-sm text-zinc-400 hover:text-zinc-900 hover:bg-white shadow-sm'
                 }`}
               >
-                <Share2 size={14} />
+                <Share2 size={15} />
               </button>
               
               <AnimatePresence>
@@ -68,7 +68,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -10 }}
-                    className="absolute left-full ml-2 top-0 flex items-center gap-2 bg-white/90 backdrop-blur-md p-1.5 rounded-full shadow-xl border border-zinc-100"
+                    className="absolute left-full ml-3 top-0 flex items-center gap-2 bg-white/95 backdrop-blur-md p-2 rounded-full shadow-2xl border border-zinc-100"
                   >
                     {shareLinks.map((link, idx) => (
                       <a 
@@ -88,7 +88,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               </AnimatePresence>
             </div>
             {product.isNew && (
-              <span className="bg-zinc-900 text-white text-[7px] uppercase tracking-[0.3em] px-3 py-1.5 font-bold">New Arrival</span>
+              <span className="bg-amber-600 text-white text-[8px] uppercase tracking-[0.4em] px-4 py-2 font-bold rounded-full shadow-lg shadow-amber-600/20">New</span>
             )}
           </div>
 
@@ -98,42 +98,46 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               e.preventDefault();
               toggleWishlist(product);
             }}
-            className={`absolute top-4 right-4 p-2.5 rounded-full transition-all duration-500 z-10 ${
+            className={`absolute top-5 right-5 p-3 rounded-full transition-all duration-500 z-10 ${
               isWishlisted 
                 ? 'bg-amber-600 text-white shadow-lg' 
-                : 'bg-white/80 backdrop-blur-sm text-zinc-400 hover:text-amber-600 hover:bg-white shadow-sm'
+                : 'bg-white/90 backdrop-blur-sm text-zinc-400 hover:text-amber-600 hover:bg-white shadow-sm'
             }`}
           >
-            <Heart size={14} fill={isWishlisted ? "currentColor" : "none"} strokeWidth={isWishlisted ? 0 : 1.5} />
+            <Heart size={15} fill={isWishlisted ? "currentColor" : "none"} strokeWidth={isWishlisted ? 0 : 1.5} />
           </button>
 
           {/* Quick Actions Overlay */}
-          <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out flex flex-col">
+          <div className="absolute inset-x-4 bottom-4 translate-y-[120%] group-hover:translate-y-0 transition-transform duration-500 ease-out flex flex-col gap-2 z-20">
             <button 
               onClick={() => setIsQuickViewOpen(true)}
-              className="w-full py-3 bg-white/90 backdrop-blur-sm text-zinc-900 text-[9px] uppercase tracking-[0.3em] font-bold flex items-center justify-center space-x-2 hover:bg-zinc-100 transition-colors border-b border-zinc-100"
+              className="w-full py-3.5 bg-white/95 backdrop-blur-md text-zinc-900 text-[10px] uppercase tracking-[0.4em] font-bold flex items-center justify-center space-x-2 hover:bg-zinc-900 hover:text-white transition-all rounded-xl shadow-xl"
             >
               <Eye size={14} />
               <span>Quick View</span>
             </button>
             <button 
               onClick={() => addToCart(product)}
-              className="w-full py-4 bg-zinc-900/90 backdrop-blur-sm text-white text-[9px] uppercase tracking-[0.3em] font-bold flex items-center justify-center space-x-2 hover:bg-amber-600 transition-colors"
+              className="w-full py-4 bg-zinc-900/95 backdrop-blur-md text-white text-[10px] uppercase tracking-[0.4em] font-bold flex items-center justify-center space-x-2 hover:bg-amber-600 transition-all rounded-xl shadow-xl"
             >
               <ShoppingBag size={14} />
-              <span>Quick Add</span>
+              <span>Add to Cart</span>
             </button>
           </div>
         </div>
 
-        <div className="text-center px-2">
-          <span className="text-[8px] uppercase tracking-[0.3em] text-zinc-400 mb-2 block font-medium">{product.category} Collection</span>
+        <div className="text-center px-4">
+          <span className="text-[9px] uppercase tracking-[0.5em] text-amber-600 mb-3 block font-bold">{product.category}</span>
           <Link to={`/product/${product.id}`}>
-            <h4 className="text-base sm:text-lg font-serif text-zinc-900 mb-2 group-hover:text-amber-700 transition-colors line-clamp-1 tracking-wide">{product.name}</h4>
+            <h4 className="text-lg sm:text-xl font-serif text-zinc-900 mb-3 group-hover:text-amber-700 transition-colors line-clamp-1 tracking-tight leading-tight">{product.name}</h4>
           </Link>
-          <p className="text-xs sm:text-sm font-light text-zinc-500 tracking-widest">
-            {product.price.toFixed(3)} {product.currency}
-          </p>
+          <div className="flex items-center justify-center space-x-2">
+            <span className="w-8 h-px bg-zinc-200" />
+            <p className="text-sm font-light text-zinc-500 tracking-[0.2em]">
+              {product.price.toFixed(3)} {product.currency}
+            </p>
+            <span className="w-8 h-px bg-zinc-200" />
+          </div>
         </div>
       </motion.div>
 

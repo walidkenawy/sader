@@ -1,29 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, ShieldCheck, Truck, RotateCcw, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import ProductCard from '../components/ProductCard';
 
 const Home: React.FC = () => {
-  const [currentPrivateVideo, setCurrentPrivateVideo] = useState(0);
-  const privateVideos = ['/video_9.mp4', '/video_1.mp4', '/video_2.mp4'];
-
-  const nextVideo = () => setCurrentPrivateVideo((prev) => (prev + 1) % privateVideos.length);
-  const prevVideo = () => setCurrentPrivateVideo((prev) => (prev - 1 + privateVideos.length) % privateVideos.length);
-
-  useEffect(() => {
-    const timer = setInterval(nextVideo, 8000); // Change video every 8 seconds
-    return () => clearInterval(timer);
-  }, []);
-
   const collections = [
     { 
       id: 'Private', 
       title: 'Private Collection', 
       desc: 'A masterpiece of refined luxury, crafted for those who seek exclusivity beyond the ordinary. Each fragrance reflects timeless elegance, sophistication, and unmatched distinction.',
       image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=1200',
-      videos: privateVideos
+      video: '/video_9.mp4'
     },
     { 
       id: 'Luxury', 
@@ -66,7 +55,7 @@ const Home: React.FC = () => {
             className="w-full h-full object-cover opacity-60"
           >
             <source 
-              src="/video_0.mp4" 
+              src="/video_10.mp4" 
               type="video/mp4" 
             />
           </video>
@@ -176,6 +165,49 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Featured Products Section */}
+      <section className="py-32 px-6 bg-[#FAFAFA] overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div>
+              <motion.span 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-[10px] uppercase tracking-[0.6em] text-amber-600 font-bold mb-4 block"
+              >
+                Curated Selection
+              </motion.span>
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-4xl lg:text-6xl font-serif text-zinc-900 uppercase tracking-tight"
+              >
+                Featured <span className="italic font-light text-zinc-400">Products</span>
+              </motion.h2>
+            </div>
+            <Link to="/shop?category=Private" className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 hover:text-amber-600 transition-all border-b border-zinc-200 pb-1 hover:border-amber-600">
+              View All Private Collection
+            </Link>
+          </div>
+
+          <div className="relative">
+            <div className="flex overflow-x-auto pb-12 gap-8 snap-x no-scrollbar">
+              {PRODUCTS.filter(p => p.category === 'Private').slice(0, 4).map((product, idx) => (
+                <div key={product.id} className="min-w-[280px] sm:min-w-[320px] lg:min-w-[350px] snap-start">
+                  <ProductCard product={product} />
+                </div>
+              ))}
+            </div>
+            
+            {/* Scroll Hint Gradient */}
+            <div className="absolute top-0 right-0 bottom-12 w-24 bg-gradient-to-l from-[#FAFAFA] to-transparent pointer-events-none hidden lg:block" />
+          </div>
+        </div>
+      </section>
+
       {/* Collection Sections */}
       {collections.map((col, idx) => (
         <section key={col.id} className={`py-32 px-6 ${idx % 2 === 0 ? 'bg-[#FAFAFA]' : 'bg-white'}`}>
@@ -220,23 +252,7 @@ const Home: React.FC = () => {
                   viewport={{ once: true }}
                   className="space-y-4"
                 >
-                  {col.videos ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {col.videos.map((v, vIdx) => (
-                        <div key={vIdx} className={`relative overflow-hidden rounded-2xl shadow-lg bg-zinc-900 aspect-video ${vIdx === 0 ? 'sm:col-span-2' : ''}`}>
-                          <video
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
-                          >
-                            <source src={v} type="video/mp4" />
-                          </video>
-                        </div>
-                      ))}
-                    </div>
-                  ) : col.video ? (
+                  {col.video ? (
                     <div className="relative aspect-[16/9] overflow-hidden rounded-2xl shadow-lg bg-zinc-900">
                       <video
                         autoPlay
@@ -356,8 +372,8 @@ const Home: React.FC = () => {
             </motion.h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((id) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((id) => (
               <motion.div
                 key={id}
                 initial={{ opacity: 0, scale: 0.9 }}

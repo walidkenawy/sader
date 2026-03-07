@@ -3,16 +3,17 @@ import { motion } from 'motion/react';
 
 const Cinematics: React.FC = () => {
   const videos = [
-    { id: 0, title: 'Nero Grande', desc: 'The flagship cinematic experience for the Nero Grande Collection.', src: '/video_0.mp4' },
-    { id: 1, title: 'Private Collection 3D', desc: 'A stunning 3D visualization of the Private Collection bottles.', src: '/video_1.mp4' },
-    { id: 2, title: 'Private Collection 3D (Alt)', desc: 'Alternative 3D render showcasing the Private Collection.', src: '/video_2.mp4' },
-    { id: 3, title: 'Grande Collection Lineup', desc: 'The full lineup of the Grande Collection in motion.', src: '/video_3.mp4' },
-    { id: 4, title: 'Grande Collection Lineup (Alt)', desc: 'Alternative view of the Grande Collection fragrances.', src: '/video_4.mp4' },
-    { id: 5, title: 'Luxury Collection Lineup', desc: 'A dynamic showcase of the Luxury Collection products.', src: '/video_5.mp4' },
-    { id: 6, title: 'Design Concept I', desc: 'Initial design sketches and wireframes for the Sedra brand.', src: '/video_6.mp4' },
-    { id: 7, title: 'Design Concept II', desc: 'Detailed wireframe exploration of bottle geometry.', src: '/video_7.mp4' },
-    { id: 8, title: 'Design Concept III', desc: 'Final design process and brand identity visualization.', src: '/video_8.mp4' },
-    { id: 9, title: 'Private Collection Showcase', desc: 'An elegant showcase of the Private Collection bottles on reflective surfaces.', src: '/video_9.mp4' },
+    { id: 0, title: 'Nero Grande', desc: 'The flagship cinematic experience for the Nero Grande Collection, featuring volcanic elements and intense energy.', src: '/video_0.mp4' },
+    { id: 1, title: 'Private Collection: Prism', desc: 'A vibrant 3D visualization of the Private Collection, showcasing the interplay of light and color.', src: '/video_1.mp4' },
+    { id: 2, title: 'Private Collection: Motion', desc: 'Dynamic motion graphics highlighting the architectural geometry of the Private Collection bottles.', src: '/video_2.mp4' },
+    { id: 3, title: 'Grande Collection: Lineup', desc: 'The full lineup of the Grande Collection, presented in a clean, modern cinematic environment.', src: '/video_3.mp4' },
+    { id: 4, title: 'Grande Collection: Detail', desc: 'Close-up cinematic shots focusing on the intricate textures and branding of the Grande Collection.', src: '/video_4.mp4' },
+    { id: 5, title: 'Luxury Collection: Opulence', desc: 'A dynamic showcase of the Luxury Collection, emphasizing its rich heritage and premium positioning.', src: '/video_5.mp4' },
+    { id: 6, title: 'Design Concept: The Sketch', desc: 'Witness the birth of a fragrance bottle through initial artistic sketches and wireframe concepts.', src: '/video_6.mp4' },
+    { id: 7, title: 'Design Concept: Geometry', desc: 'Exploring the mathematical precision and geometric beauty of our signature bottle designs.', src: '/video_7.mp4' },
+    { id: 8, title: 'Design Concept: Final Form', desc: 'The transition from digital wireframe to the final, polished luxury product.', src: '/video_8.mp4' },
+    { id: 9, title: 'Private Collection: The Ensemble', desc: 'A grand cinematic showcase of the entire Private Collection lineup in a pristine architectural setting.', src: '/video_9.mp4' },
+    { id: 10, title: 'Brand Identity: The Core', desc: 'A powerful visualization of the Sedra brand identity, merging luxury with modern artistic expression.', src: '/video_10.mp4' },
   ];
 
   return (
