@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import ViewportVideo from '../components/ViewportVideo';
 
 const Cinematics: React.FC = () => {
   const videos = [
@@ -56,15 +57,10 @@ const Cinematics: React.FC = () => {
               className="group"
             >
               <div className="relative aspect-video overflow-hidden rounded-xl bg-zinc-900 shadow-2xl mb-6 border border-zinc-800">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
+                <ViewportVideo
+                  src={video.src}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                >
-                  <source src={video.src} type="video/mp4" />
-                </video>
+                />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                   <div className="w-16 h-16 rounded-full border border-white/30 flex items-center justify-center backdrop-blur-sm">
                     <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[12px] border-l-white border-b-[8px] border-b-transparent ml-1" />

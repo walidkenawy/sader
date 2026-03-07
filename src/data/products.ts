@@ -9,6 +9,7 @@ export const PRODUCTS: Product[] = [
     currency: 'KWD',
     category: 'Private',
     image: 'https://www.sedraperfumes.com/web/image/product.template/572/image_1024',
+    video: '/video_1.mp4',
     description: 'An olfactory masterpiece that radiates pure confidence. Feeling Good opens with the rare brilliance of Saffron and Bergamot, evolving into a regal heart of Oud and Rose. This fragrance is a celebration of refined luxury, leaving a trail of sophisticated Leather and warm Amber that commands respect and admiration.',
     size: '90ml',
     isNew: true,
@@ -25,6 +26,7 @@ export const PRODUCTS: Product[] = [
     currency: 'KWD',
     category: 'Private',
     image: 'https://www.sedraperfumes.com/web/image/product.template/574/image_1024',
+    video: '/video_2.mp4',
     description: 'A nostalgic journey captured in a bottle. Flashback intertwines the spicy allure of Cardamom and Pink Pepper with a delicate heart of Iris and Jasmine. Inspired by cherished memories and unforgettable moments, it settles into a creamy embrace of Sandalwood and Vanilla, creating a scent that is both intimate and timeless.',
     size: '90ml',
     notes: {
@@ -40,6 +42,7 @@ export const PRODUCTS: Product[] = [
     currency: 'KWD',
     category: 'Private',
     image: 'https://www.sedraperfumes.com/web/image/product.template/575/image_1024',
+    video: '/video_3.mp4',
     description: 'A bold, unapologetic statement for the modern visionary. WHY NOT? challenges the ordinary with an explosive opening of Ginger and Grapefruit, leading to an aromatic heart of Sage and Rosemary. Rooted in the earthy depth of Vetiver and Patchouli, it is a fragrance for those who dare to define their own path with elegance and flair.',
     size: '90ml',
     notes: {
@@ -55,6 +58,7 @@ export const PRODUCTS: Product[] = [
     currency: 'KWD',
     category: 'Private',
     image: 'https://www.sedraperfumes.com/web/image/product.template/576/image_1024',
+    video: '/video_4.mp4',
     description: 'The essence of inherited elegance and quiet luxury. OLD MONEY whispers of tradition and distinction with a crisp blend of Lemon and Mint, softened by a classic heart of Lavender and Geranium. The dry down of Cedarwood and Musk provides a sturdy, sophisticated foundation that feels both established and eternally modern.',
     size: '90ml',
     notes: {

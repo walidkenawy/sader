@@ -7,6 +7,7 @@ export interface Product {
   currency: string;
   category: CollectionType;
   image: string;
+  video?: string;
   description: string;
   size: string;
   isNew?: boolean;

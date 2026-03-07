@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import ProductCard from '../components/ProductCard';
+import ViewportVideo from '../components/ViewportVideo';
 
 const Home: React.FC = () => {
   const collections = [
@@ -20,20 +21,6 @@ const Home: React.FC = () => {
       desc: 'Sedra’s premium line for special occasions and memorable moments. Sophisticated, rich, and long-lasting scents that highlight elegance and exclusivity.',
       image: 'https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=1200',
       video: '/video_5.mp4'
-    },
-    { 
-      id: 'Grande', 
-      title: 'Grande Collection', 
-      desc: 'Designed for everyday wear. Fresh, versatile, and modern fragrances that suit daily life and any casual setting.',
-      image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=1200',
-      video: '/video_3.mp4'
-    },
-    { 
-      id: 'Femi', 
-      title: 'Femi Collection', 
-      desc: 'A dedicated line for hair and body mists. Light, refreshing, and feminine scents that add a soft touch throughout the day.',
-      image: 'https://images.unsplash.com/photo-1615484477778-ca3b77940c25?auto=format&fit=crop&q=80&w=1200',
-      video: '/video_4.mp4'
     }
   ];
 
@@ -47,18 +34,10 @@ const Home: React.FC = () => {
           transition={{ duration: 2, ease: 'easeOut' }}
           className="absolute inset-0"
         >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
+          <ViewportVideo
+            src="/video_10.mp4"
             className="w-full h-full object-cover opacity-60"
-          >
-            <source 
-              src="/video_10.mp4" 
-              type="video/mp4" 
-            />
-          </video>
+          />
           {/* Dark overlay for readability */}
           <div className="absolute inset-0 bg-black/50" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
@@ -128,18 +107,10 @@ const Home: React.FC = () => {
             className="relative"
           >
             <div className="aspect-[4/5] overflow-hidden shadow-2xl bg-white flex items-center justify-center">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
+              <ViewportVideo
+                src="/video_8.mp4"
                 className="w-full h-full object-contain p-8 transition-transform duration-[2s] hover:scale-110"
-              >
-                <source 
-                  src="/video_8.mp4" 
-                  type="video/mp4" 
-                />
-              </video>
+              />
             </div>
             <div className="absolute -bottom-12 -left-12 w-72 h-72 bg-amber-50/50 -z-10 hidden lg:block" />
           </motion.div>
@@ -254,15 +225,10 @@ const Home: React.FC = () => {
                 >
                   {col.video ? (
                     <div className="relative aspect-[16/9] overflow-hidden rounded-2xl shadow-lg bg-zinc-900">
-                      <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
+                      <ViewportVideo
+                        src={col.video}
                         className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
-                      >
-                        <source src={col.video} type="video/mp4" />
-                      </video>
+                      />
                     </div>
                   ) : (
                     <div className="relative aspect-[16/9] overflow-hidden rounded-2xl shadow-lg bg-zinc-900">
@@ -286,6 +252,122 @@ const Home: React.FC = () => {
           </div>
         </section>
       ))}
+
+      {/* Grande Collection Spotlight - Prominent Video Section */}
+      <section className="relative h-[80vh] flex items-center overflow-hidden bg-zinc-900">
+        <div className="absolute inset-0">
+          <ViewportVideo
+            src="/video_4.mp4"
+            className="w-full h-full object-cover opacity-50"
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/40 to-transparent" />
+        </div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex justify-end">
+          <div className="max-w-2xl text-right">
+            <motion.span 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-[10px] uppercase tracking-[0.8em] text-amber-500 font-bold mb-6 block"
+            >
+              Grande Collection
+            </motion.span>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-6xl lg:text-8xl font-serif text-white mb-8 uppercase tracking-tight leading-none"
+            >
+              Grande <br /> <span className="italic font-light text-zinc-400">Everyday</span>
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-zinc-300 text-lg font-light leading-relaxed mb-12 max-w-lg ml-auto"
+            >
+              Designed for everyday wear. Fresh, versatile, and modern fragrances that suit daily life and any casual setting. Elevate your daily routine with Sedra.
+            </motion.p>
+            <div className="flex flex-wrap gap-6 justify-end">
+              <Link to="/shop?category=Grande" className="px-12 py-5 bg-white text-zinc-900 text-[10px] uppercase tracking-[0.3em] font-bold rounded-full hover:bg-amber-500 hover:text-white transition-all duration-500">
+                Shop Collection
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Grande Products Grid */}
+      <section className="py-24 px-6 bg-[#FAFAFA]">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+            {PRODUCTS.filter(p => p.category === 'Grande').slice(0, 4).map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Femi Collection Spotlight - Prominent Video Section */}
+      <section className="relative h-[80vh] flex items-center overflow-hidden bg-zinc-900">
+        <div className="absolute inset-0">
+          <ViewportVideo
+            src="/video_4.mp4"
+            className="w-full h-full object-cover opacity-50"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+        </div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+          <div className="max-w-2xl">
+            <motion.span 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-[10px] uppercase tracking-[0.8em] text-amber-500 font-bold mb-6 block"
+            >
+              Femi Collection
+            </motion.span>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-6xl lg:text-8xl font-serif text-white mb-8 uppercase tracking-tight leading-none"
+            >
+              Femi <br /> <span className="italic font-light text-zinc-400">Mist</span>
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-zinc-300 text-lg font-light leading-relaxed mb-12 max-w-lg"
+            >
+              A dedicated line for hair and body mists. Light, refreshing, and feminine scents that add a soft touch throughout the day. Experience the essence of delicate luxury.
+            </motion.p>
+            <div className="flex flex-wrap gap-6">
+              <Link to="/shop?category=Femi" className="px-12 py-5 bg-white text-zinc-900 text-[10px] uppercase tracking-[0.3em] font-bold rounded-full hover:bg-amber-500 hover:text-white transition-all duration-500">
+                Shop Collection
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Femi Products Grid */}
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+            {PRODUCTS.filter(p => p.category === 'Femi').slice(0, 4).map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Cinematics Teaser */}
       <section className="py-32 px-6 bg-zinc-950 text-white overflow-hidden">
@@ -331,15 +413,10 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="relative z-10 aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/10"
               >
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
+                <ViewportVideo
+                  src="/video_8.mp4"
                   className="w-full h-full object-cover"
-                >
-                  <source src="/video_8.mp4" type="video/mp4" />
-                </video>
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               </motion.div>
               <div className="absolute -top-12 -right-12 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -z-10" />
@@ -382,15 +459,10 @@ const Home: React.FC = () => {
                 transition={{ delay: id * 0.05 }}
                 className="relative aspect-square overflow-hidden rounded-lg bg-zinc-800 group"
               >
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
+                <ViewportVideo
+                  src={`/video_${id}.mp4`}
                   className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"
-                >
-                  <source src={`/video_${id}.mp4`} type="video/mp4" />
-                </video>
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
                   <span className="text-[8px] uppercase tracking-widest text-white font-bold">Scene {id + 1}</span>
                 </div>

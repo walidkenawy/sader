@@ -20,6 +20,7 @@ import Wishlist from './pages/Wishlist';
 import Cinematics from './pages/Cinematics';
 import Contact from './pages/Contact';
 import About from './pages/About';
+import Studio from './pages/Studio';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -53,6 +54,7 @@ export default function App() {
                 <Route path="/cinematics" element={<Cinematics />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/studio" element={<Studio />} />
               </Routes>
             </main>
   

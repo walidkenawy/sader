@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, ShoppingBag, Eye, Share2, Facebook, Twitter, MessageCircle } from 'lucide-react';
 import { Product } from '../types';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useInView } from 'motion/react';
 import QuickViewModal from './QuickViewModal';
 
 interface ProductCardProps {
@@ -27,6 +27,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     { icon: <MessageCircle size={14} />, label: 'WhatsApp', url: `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}` },
   ];
 
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isInView = useInView(videoRef, { amount: 0.5 });
+
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isInView) {
+        videoRef.current.play().catch(() => {});
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [isInView]);
+
   return (
     <>
       <motion.div 
@@ -36,11 +49,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         className="group"
       >
         <div className="relative aspect-[4/5] bg-[#F9F9F9] overflow-hidden mb-8 flex items-center justify-center transition-all duration-700 rounded-2xl group-hover:shadow-2xl group-hover:shadow-zinc-200/50 group-hover:-translate-y-1">
-          <Link to={`/product/${product.id}`} className="w-full h-full flex items-center justify-center p-10 sm:p-14">
+          <Link to={`/product/${product.id}`} className="w-full h-full flex items-center justify-center p-10 sm:p-14 relative">
+            {product.video ? (
+              <video
+                ref={videoRef}
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+              >
+                <source src={product.video} type="video/mp4" />
+              </video>
+            ) : null}
             <img 
               src={product.image} 
               alt={product.name} 
-              className="max-h-full object-contain transition-transform duration-1000 group-hover:scale-110"
+              className={`max-h-full object-contain transition-transform duration-1000 group-hover:scale-110 ${product.video ? 'group-hover:opacity-0' : ''}`}
               referrerPolicy="no-referrer"
             />
           </Link>
