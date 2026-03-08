@@ -13,6 +13,8 @@ export const PRODUCTS: Product[] = [
     description: 'An olfactory masterpiece that radiates pure confidence. Feeling Good opens with the rare brilliance of Saffron and Bergamot, evolving into a regal heart of Oud and Rose. This fragrance is a celebration of refined luxury, leaving a trail of sophisticated Leather and warm Amber that commands respect and admiration.',
     size: '90ml',
     isNew: true,
+    story: 'Born from the desire to capture the feeling of a perfect morning in Kuwait, Feeling Good is more than a scent—it is a state of mind. It was crafted for the individual who walks with purpose and speaks with kindness, blending the ancient mystery of Saffron with the modern vibrancy of Bergamot.',
+    mood: ['Confident', 'Regal', 'Sophisticated'],
     notes: {
       top: ['Bergamot', 'Saffron'],
       heart: ['Oud', 'Rose'],
@@ -29,6 +31,8 @@ export const PRODUCTS: Product[] = [
     video: '/video_2.mp4',
     description: 'A nostalgic journey captured in a bottle. Flashback intertwines the spicy allure of Cardamom and Pink Pepper with a delicate heart of Iris and Jasmine. Inspired by cherished memories and unforgettable moments, it settles into a creamy embrace of Sandalwood and Vanilla, creating a scent that is both intimate and timeless.',
     size: '90ml',
+    story: 'Flashback is a tribute to the power of memory. A single spray transports you to a sun-drenched courtyard, the air thick with the scent of blooming jasmine and the warmth of shared laughter. It is a fragrance that bridges the gap between who we were and who we are becoming.',
+    mood: ['Nostalgic', 'Intimate', 'Timeless'],
     notes: {
       top: ['Cardamom', 'Pink Pepper'],
       heart: ['Iris', 'Jasmine'],
@@ -45,6 +49,8 @@ export const PRODUCTS: Product[] = [
     video: '/video_3.mp4',
     description: 'A bold, unapologetic statement for the modern visionary. WHY NOT? challenges the ordinary with an explosive opening of Ginger and Grapefruit, leading to an aromatic heart of Sage and Rosemary. Rooted in the earthy depth of Vetiver and Patchouli, it is a fragrance for those who dare to define their own path with elegance and flair.',
     size: '90ml',
+    story: 'WHY NOT? is the olfactory embodiment of a challenge accepted. It was created for the risk-takers and the rule-breakers who see every "no" as an invitation to prove them wrong. The explosive ginger opening is a wake-up call to the senses, a reminder that greatness lies just beyond the comfort zone.',
+    mood: ['Bold', 'Visionary', 'Dynamic'],
     notes: {
       top: ['Grapefruit', 'Ginger'],
       heart: ['Sage', 'Rosemary'],
@@ -61,6 +67,8 @@ export const PRODUCTS: Product[] = [
     video: '/video_4.mp4',
     description: 'The essence of inherited elegance and quiet luxury. OLD MONEY whispers of tradition and distinction with a crisp blend of Lemon and Mint, softened by a classic heart of Lavender and Geranium. The dry down of Cedarwood and Musk provides a sturdy, sophisticated foundation that feels both established and eternally modern.',
     size: '90ml',
+    story: 'Old Money is a fragrance that doesn\'t need to shout to be heard. It represents the quiet confidence of legacy and the effortless grace of true distinction. Inspired by the libraries of grand estates and the crisp air of early morning rides, it is a scent for those who value substance over spectacle.',
+    mood: ['Elegant', 'Traditional', 'Distinguished'],
     notes: {
       top: ['Lemon', 'Mint'],
       heart: ['Lavender', 'Geranium'],
@@ -77,6 +85,8 @@ export const PRODUCTS: Product[] = [
     image: 'https://www.sedraperfumes.com/web/image/product.template/21/image_1024',
     description: 'A decadent floral symphony designed for the grandest occasions. Dacova enchants with luscious Blackcurrant and Pear, blooming into a rich heart of Tuberose and Orange Blossom. The base of Praline and Tonka Bean adds a gourmand touch of irresistible sweetness, making every moment feel like a celebration of high-end glamour.',
     size: '120ml',
+    story: 'Dacova is the scent of a grand entrance. It was inspired by the high-society galas of the Mediterranean, where the air is heavy with the scent of expensive flowers and the promise of a night to remember. It is a celebration of femininity in its most powerful and glamorous form.',
+    mood: ['Glamorous', 'Decadent', 'Powerful'],
     notes: {
       top: ['Blackcurrant', 'Pear'],
       heart: ['Orange Blossom', 'Tuberose'],

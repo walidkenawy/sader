@@ -1,21 +1,26 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'motion/react';
-import { ShoppingBag, Heart, Share2, ChevronRight, Minus, Plus, Star, ShieldCheck, Truck, RotateCcw, Wind, Trees, Leaf, Facebook, Twitter, MessageCircle } from 'lucide-react';
+import { ShoppingBag, Heart, Share2, ChevronRight, Minus, Plus, Star, ShieldCheck, Truck, RotateCcw, Wind, Trees, Leaf, Facebook, Twitter, MessageCircle, Sparkles, Quote } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import { useCurrency } from '../context/CurrencyContext';
 import ProductCard from '../components/ProductCard';
+import FragrancePyramid from '../components/FragrancePyramid';
 
-const ScentNote: React.FC<{ label: string; notes: string[]; icon: React.ReactNode }> = ({ label, notes, icon }) => (
+const ScentNote: React.FC<{ label: string; notes: string[]; icon: React.ReactNode; color: string }> = ({ label, notes, icon, color }) => (
   <div className="flex flex-col space-y-3">
-    <div className="flex items-center space-x-3 text-amber-600">
-      {icon}
+    <div className="flex items-center space-x-3">
+      <div className={`w-8 h-8 rounded-full ${color} flex items-center justify-center`}>
+        {icon}
+      </div>
       <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900">{label}</span>
     </div>
     <div className="flex flex-wrap gap-2">
       {notes.map((note) => (
-        <span key={note} className="text-[11px] text-zinc-500 bg-zinc-50 px-3 py-1 rounded-full border border-zinc-100">
+        <span key={note} className="text-[11px] text-zinc-500 bg-white px-3 py-1 rounded-full border border-zinc-100 shadow-sm">
           {note}
         </span>
       ))}
@@ -27,6 +32,7 @@ const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { formatPrice } = useCurrency();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
 
@@ -49,6 +55,9 @@ const ProductDetail: React.FC = () => {
   if (!product) {
     return (
       <div className="pt-40 pb-24 text-center">
+        <Helmet>
+          <title>Product Not Found | Sedra Perfumes</title>
+        </Helmet>
         <h2 className="text-3xl font-serif text-zinc-900 mb-6">Product not found</h2>
         <Link to="/shop" className="px-10 py-4 bg-zinc-900 text-white text-[10px] uppercase tracking-widest font-bold rounded-full">
           Back to Shop
@@ -57,8 +66,38 @@ const ProductDetail: React.FC = () => {
     );
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": product.name,
+    "image": product.image,
+    "description": product.description,
+    "brand": {
+      "@type": "Brand",
+      "name": "Sedra Perfumes"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": window.location.href,
+      "priceCurrency": product.currency,
+      "price": product.price,
+      "availability": "https://schema.org/InStock"
+    }
+  };
+
   return (
     <div className="pt-32 pb-24 px-6 bg-white min-h-screen">
+      <Helmet>
+        <title>{product.name} - {product.category} Collection | Sedra Perfumes</title>
+        <meta name="description" content={`Discover ${product.name} from our ${product.category} Collection. ${product.description.substring(0, 160)}`} />
+        <meta property="og:title" content={`${product.name} - ${product.category} Collection | Sedra Perfumes`} />
+        <meta property="og:description" content={product.description} />
+        <meta property="og:image" content={product.image} />
+        <meta property="og:type" content="product" />
+        <script type="application/ld+json">
+          {JSON.stringify(jsonLd)}
+        </script>
+      </Helmet>
       <div className="max-w-7xl mx-auto">
         {/* Breadcrumbs */}
         <div className="flex items-center space-x-2 text-[10px] uppercase tracking-widest font-bold text-zinc-400 mb-12">
@@ -106,8 +145,19 @@ const ProductDetail: React.FC = () => {
             </div>
 
             <div className="text-lg sm:text-2xl lg:text-3xl font-light text-zinc-900 mb-6 sm:mb-10 tracking-widest">
-              {product.price.toFixed(3)} {product.currency}
+              {formatPrice(product.price)}
             </div>
+
+            {product.mood && (
+              <div className="flex flex-wrap gap-2 mb-8">
+                {product.mood.map(m => (
+                  <span key={m} className="px-4 py-1.5 bg-zinc-50 border border-zinc-100 text-[9px] uppercase tracking-widest font-bold text-zinc-400 rounded-full flex items-center">
+                    <Sparkles size={10} className="mr-2 text-amber-500" />
+                    {m}
+                  </span>
+                ))}
+              </div>
+            )}
 
             <p className="text-zinc-500 leading-relaxed text-xs sm:text-lg mb-8 sm:mb-12 font-light line-clamp-3 sm:line-clamp-none">
               {product.description}
@@ -121,17 +171,20 @@ const ProductDetail: React.FC = () => {
                   <ScentNote 
                     label="Top Notes" 
                     notes={product.notes.top} 
-                    icon={<Wind size={14} className="sm:w-[16px] sm:h-[16px]" strokeWidth={1.5} />} 
+                    icon={<Wind size={14} className="text-amber-600" />} 
+                    color="bg-amber-50"
                   />
                   <ScentNote 
                     label="Heart Notes" 
                     notes={product.notes.heart} 
-                    icon={<Heart size={14} className="sm:w-[16px] sm:h-[16px]" strokeWidth={1.5} />} 
+                    icon={<Heart size={14} className="text-rose-600" />} 
+                    color="bg-rose-50"
                   />
                   <ScentNote 
                     label="Base Notes" 
                     notes={product.notes.base} 
-                    icon={<Trees size={14} className="sm:w-[16px] sm:h-[16px]" strokeWidth={1.5} />} 
+                    icon={<Trees size={14} className="text-emerald-600" />} 
+                    color="bg-emerald-50"
                   />
                 </div>
               </div>
@@ -230,14 +283,21 @@ const ProductDetail: React.FC = () => {
         {/* Tabs */}
         <div className="mb-24">
           <div className="flex items-center space-x-12 border-b border-zinc-100 mb-12 overflow-x-auto no-scrollbar">
-            {['description', 'shipping'].map(tab => (
+            {['the story', 'scent profile', 'shipping'].map(tab => (
               <button 
                 key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`pb-4 text-[10px] uppercase tracking-[0.3em] font-bold transition-all whitespace-nowrap relative ${activeTab === tab ? 'text-zinc-900' : 'text-zinc-400 hover:text-zinc-600'}`}
+                onClick={() => setActiveTab(tab === 'the story' ? 'description' : tab === 'scent profile' ? 'notes' : tab)}
+                className={`pb-4 text-[10px] uppercase tracking-[0.3em] font-bold transition-all whitespace-nowrap relative ${
+                  (activeTab === 'description' && tab === 'the story') || 
+                  (activeTab === 'notes' && tab === 'scent profile') || 
+                  activeTab === tab 
+                    ? 'text-zinc-900' : 'text-zinc-400 hover:text-zinc-600'
+                }`}
               >
                 {tab}
-                {activeTab === tab && <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-600" />}
+                {((activeTab === 'description' && tab === 'the story') || 
+                  (activeTab === 'notes' && tab === 'scent profile') || 
+                  activeTab === tab) && <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-600" />}
               </button>
             ))}
           </div>
@@ -250,30 +310,30 @@ const ProductDetail: React.FC = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="text-zinc-500 leading-relaxed text-lg"
+                  className="space-y-12"
                 >
-                  <p className="mb-12">
-                    {product.description}
-                  </p>
+                  <div className="flex items-start space-x-6">
+                    <Quote size={40} className="text-amber-100 shrink-0" />
+                    <p className="text-zinc-900 font-serif italic text-2xl leading-relaxed">
+                      {product.story || product.description}
+                    </p>
+                  </div>
                   
+                  <div className="text-zinc-500 leading-relaxed text-lg pl-16">
+                    {product.description}
+                  </div>
+                </motion.div>
+              )}
+              {activeTab === 'notes' && (
+                <motion.div 
+                  key="notes"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="max-w-2xl"
+                >
                   {product.notes && (
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 pt-12 border-t border-zinc-100">
-                      <ScentNote 
-                        label="Top Notes" 
-                        notes={product.notes.top} 
-                        icon={<Wind size={20} strokeWidth={1} />} 
-                      />
-                      <ScentNote 
-                        label="Heart Notes" 
-                        notes={product.notes.heart} 
-                        icon={<Leaf size={20} strokeWidth={1} />} 
-                      />
-                      <ScentNote 
-                        label="Base Notes" 
-                        notes={product.notes.base} 
-                        icon={<Trees size={20} strokeWidth={1} />} 
-                      />
-                    </div>
+                    <FragrancePyramid notes={product.notes} />
                   )}
                 </motion.div>
               )}

@@ -12,6 +12,8 @@ export interface Product {
   size: string;
   isNew?: boolean;
   isSale?: boolean;
+  story?: string;
+  mood?: string[];
   notes?: {
     top: string[];
     heart: string[];

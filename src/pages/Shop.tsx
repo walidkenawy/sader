@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'motion/react';
 import { Filter, ChevronDown, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
@@ -52,6 +53,10 @@ const Shop: React.FC = () => {
 
   return (
     <div className="pt-32 pb-24 px-6 bg-white min-h-screen">
+      <Helmet>
+        <title>{currentCategory ? `${currentCategory} Collection` : 'All Collections'} | Sedra Perfumes</title>
+        <meta name="description" content={`Explore the ${currentCategory || 'full'} collection of Sedra Perfumes. Luxury oriental fragrances crafted with elegance and distinction.`} />
+      </Helmet>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-24">

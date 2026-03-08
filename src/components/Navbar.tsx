@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, Heart, User, Search, Menu, X } from 'lucide-react';
+import { ShoppingBag, Heart, User, Search, Menu, X, Globe } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import { useCurrency } from '../context/CurrencyContext';
 import { motion, AnimatePresence } from 'motion/react';
 
 const Navbar: React.FC = () => {
@@ -10,6 +11,7 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { totalItems } = useCart();
   const { wishlist } = useWishlist();
+  const { currency, setCurrency, supportedCurrencies, isLoading } = useCurrency();
   const location = useLocation();
 
   useEffect(() => {
@@ -70,6 +72,20 @@ const Navbar: React.FC = () => {
 
         {/* Icons */}
         <div className="flex items-center space-x-1 sm:space-x-4">
+          {/* Currency Selector */}
+          <div className="hidden md:flex items-center mr-2">
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              disabled={isLoading}
+              className={`bg-transparent border-none text-[10px] uppercase tracking-widest font-bold focus:ring-0 cursor-pointer transition-colors duration-300 ${isScrolled ? 'text-zinc-900' : 'text-white'} hover:text-amber-600 disabled:opacity-50`}
+            >
+              {supportedCurrencies.map(c => (
+                <option key={c} value={c} className="text-zinc-900 bg-white">{c}</option>
+              ))}
+            </select>
+          </div>
+
           <button className={`p-2 transition-colors duration-300 ${isScrolled ? 'text-zinc-900' : 'text-white'} hover:text-amber-600`}>
             <Search size={20} strokeWidth={1.5} />
           </button>
@@ -137,6 +153,22 @@ const Navbar: React.FC = () => {
                   {link.name}
                 </Link>
               ))}
+            </div>
+
+            {/* Mobile Currency Selector */}
+            <div className="mt-12 pt-12 border-t border-zinc-100">
+              <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400 mb-6 block">Select Currency</span>
+              <div className="grid grid-cols-3 gap-3">
+                {supportedCurrencies.map(c => (
+                  <button
+                    key={c}
+                    onClick={() => setCurrency(c)}
+                    className={`py-3 text-[10px] font-bold tracking-widest rounded-xl border transition-all ${currency === c ? 'bg-zinc-900 text-white border-zinc-900 shadow-lg' : 'bg-zinc-50 text-zinc-500 border-zinc-100 hover:border-zinc-200'}`}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
             </div>
           </motion.div>
         </>

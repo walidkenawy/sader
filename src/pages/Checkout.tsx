@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ChevronRight, ShieldCheck, CreditCard, Truck, CheckCircle2 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useCurrency } from '../context/CurrencyContext';
 
 const Checkout: React.FC = () => {
   const { cart, totalPrice, clearCart } = useCart();
+  const { formatPrice } = useCurrency();
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -103,6 +105,55 @@ const Checkout: React.FC = () => {
             <section>
               <h3 className="text-2xl font-serif text-zinc-900 mb-10 flex items-center space-x-4">
                 <span className="w-10 h-10 bg-zinc-900 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                <span>Shipping Method</span>
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <label className="relative flex items-center p-8 bg-[#F9F9F9] cursor-pointer border border-transparent has-[:checked]:border-amber-500 transition-all">
+                  <input type="radio" name="shipping" className="sr-only" defaultChecked />
+                  <div className="w-10 h-10 mr-6 flex items-center justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/DHL_Logo.svg" alt="DHL" className="max-h-full" referrerPolicy="no-referrer" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-900">DHL Express</span>
+                    <span className="text-[8px] uppercase tracking-[0.1em] text-zinc-400">2-4 Business Days</span>
+                  </div>
+                </label>
+                <label className="relative flex items-center p-8 bg-[#F9F9F9] cursor-pointer border border-transparent has-[:checked]:border-amber-500 transition-all">
+                  <input type="radio" name="shipping" className="sr-only" />
+                  <div className="w-10 h-10 mr-6 flex items-center justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/FedEx_Express_logo.svg" alt="FedEx" className="max-h-full" referrerPolicy="no-referrer" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-900">FedEx Priority</span>
+                    <span className="text-[8px] uppercase tracking-[0.1em] text-zinc-400">3-5 Business Days</span>
+                  </div>
+                </label>
+                <label className="relative flex items-center p-8 bg-[#F9F9F9] cursor-pointer border border-transparent has-[:checked]:border-amber-500 transition-all">
+                  <input type="radio" name="shipping" className="sr-only" />
+                  <div className="w-10 h-10 mr-6 flex items-center justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/PostNL_logo.svg" alt="PostNL" className="max-h-full" referrerPolicy="no-referrer" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-900">PostNL (EU)</span>
+                    <span className="text-[8px] uppercase tracking-[0.1em] text-zinc-400">3-6 Business Days</span>
+                  </div>
+                </label>
+                <label className="relative flex items-center p-8 bg-[#F9F9F9] cursor-pointer border border-transparent has-[:checked]:border-amber-500 transition-all">
+                  <input type="radio" name="shipping" className="sr-only" />
+                  <div className="w-10 h-10 mr-6 flex items-center justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f6/Royal_Mail_logo.svg/1200px-Royal_Mail_logo.svg.png" alt="Royal Mail" className="max-h-full" referrerPolicy="no-referrer" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-900">Royal Mail (UK)</span>
+                    <span className="text-[8px] uppercase tracking-[0.1em] text-zinc-400">3-5 Business Days</span>
+                  </div>
+                </label>
+              </div>
+            </section>
+
+            <section>
+              <h3 className="text-2xl font-serif text-zinc-900 mb-10 flex items-center space-x-4">
+                <span className="w-10 h-10 bg-zinc-900 text-white rounded-full flex items-center justify-center text-xs font-bold">3</span>
                 <span>Payment Method</span>
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -115,6 +166,20 @@ const Checkout: React.FC = () => {
                   <input type="radio" name="payment" className="sr-only" />
                   <Truck className="text-zinc-400 mr-6" strokeWidth={1.5} />
                   <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-900">Cash on Delivery</span>
+                </label>
+                <label className="relative flex items-center p-8 bg-[#F9F9F9] cursor-pointer border border-transparent has-[:checked]:border-amber-500 transition-all">
+                  <input type="radio" name="payment" className="sr-only" />
+                  <div className="w-6 h-6 mr-6 flex items-center justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="max-h-full" referrerPolicy="no-referrer" />
+                  </div>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-900">PayPal</span>
+                </label>
+                <label className="relative flex items-center p-8 bg-[#F9F9F9] cursor-pointer border border-transparent has-[:checked]:border-amber-500 transition-all">
+                  <input type="radio" name="payment" className="sr-only" />
+                  <div className="w-6 h-6 mr-6 flex items-center justify-center">
+                    <span className="text-amber-600 font-black text-xs">PayU</span>
+                  </div>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-900">PayU</span>
                 </label>
               </div>
             </section>
@@ -137,7 +202,7 @@ const Checkout: React.FC = () => {
                         <span className="text-[9px] text-zinc-400 uppercase tracking-widest">Qty: {item.quantity}</span>
                       </div>
                     </div>
-                    <span className="text-xs font-light text-zinc-900 tracking-widest">{(item.price * item.quantity).toFixed(3)} KWD</span>
+                    <span className="text-xs font-light text-zinc-900 tracking-widest">{formatPrice(item.price * item.quantity)}</span>
                   </div>
                 ))}
               </div>
@@ -145,7 +210,7 @@ const Checkout: React.FC = () => {
               <div className="space-y-6 mb-10 pt-6 border-t border-zinc-200">
                 <div className="flex justify-between text-[10px] uppercase tracking-widest">
                   <span className="text-zinc-500">Subtotal</span>
-                  <span className="font-bold text-zinc-900">{totalPrice.toFixed(3)} KWD</span>
+                  <span className="font-bold text-zinc-900">{formatPrice(totalPrice)}</span>
                 </div>
                 <div className="flex justify-between text-[10px] uppercase tracking-widest">
                   <span className="text-zinc-500">Shipping</span>
@@ -153,7 +218,7 @@ const Checkout: React.FC = () => {
                 </div>
                 <div className="pt-8 border-t border-zinc-200 flex justify-between items-end">
                   <span className="text-zinc-900 font-bold uppercase tracking-[0.2em] text-[10px]">Total Amount</span>
-                  <span className="text-3xl font-light text-zinc-900 tracking-widest">{totalPrice.toFixed(3)} KWD</span>
+                  <span className="text-3xl font-light text-zinc-900 tracking-widest">{formatPrice(totalPrice)}</span>
                 </div>
               </div>
 

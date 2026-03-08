@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Trash2, Minus, Plus, ShoppingBag, ArrowRight, ChevronRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useCurrency } from '../context/CurrencyContext';
 
 const Cart: React.FC = () => {
   const { cart, removeFromCart, updateQuantity, totalPrice } = useCart();
+  const { formatPrice } = useCurrency();
 
   if (cart.length === 0) {
     return (
@@ -69,7 +71,7 @@ const Cart: React.FC = () => {
                         <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="p-1 text-zinc-400 hover:text-zinc-900 transition-colors"><Plus size={14} /></button>
                       </div>
                       <div className="text-lg font-light text-zinc-900 tracking-widest">
-                        {(item.price * item.quantity).toFixed(3)} {item.currency}
+                        {formatPrice(item.price * item.quantity)}
                       </div>
                     </div>
                   </div>
@@ -93,7 +95,7 @@ const Cart: React.FC = () => {
               <div className="space-y-6 mb-10">
                 <div className="flex justify-between text-xs uppercase tracking-widest">
                   <span className="text-zinc-500">Subtotal</span>
-                  <span className="font-bold text-zinc-900">{totalPrice.toFixed(3)} KWD</span>
+                  <span className="font-bold text-zinc-900">{formatPrice(totalPrice)}</span>
                 </div>
                 <div className="flex justify-between text-xs uppercase tracking-widest">
                   <span className="text-zinc-500">Shipping</span>
@@ -101,7 +103,7 @@ const Cart: React.FC = () => {
                 </div>
                 <div className="pt-8 border-t border-zinc-200 flex justify-between items-end">
                   <span className="text-zinc-900 font-bold uppercase tracking-[0.2em] text-[10px]">Total Amount</span>
-                  <span className="text-3xl font-light text-zinc-900 tracking-widest">{totalPrice.toFixed(3)} KWD</span>
+                  <span className="text-3xl font-light text-zinc-900 tracking-widest">{formatPrice(totalPrice)}</span>
                 </div>
               </div>
 
@@ -116,9 +118,13 @@ const Cart: React.FC = () => {
               <div className="mt-12 space-y-6">
                 <p className="text-[9px] text-zinc-400 text-center uppercase tracking-[0.3em] font-bold">Secure Checkout Guaranteed</p>
                 <div className="flex justify-center items-center space-x-6 opacity-30 grayscale">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_logo%2C_revised_2016.svg" alt="Stripe" className="h-3" referrerPolicy="no-referrer" />
                   <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-2.5" referrerPolicy="no-referrer" />
                   <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-5" referrerPolicy="no-referrer" />
                   <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-3.5" referrerPolicy="no-referrer" />
+                  <div className="flex items-center">
+                    <span className="text-zinc-900 font-black text-[8px] tracking-tighter">PayU</span>
+                  </div>
                 </div>
               </div>
             </div>

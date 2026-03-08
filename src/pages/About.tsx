@@ -1,7 +1,42 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, ShieldCheck, Gem } from 'lucide-react';
+import { ArrowRight, Sparkles, ShieldCheck, Gem, Plus, Minus } from 'lucide-react';
+
+const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border-b border-zinc-100 last:border-none">
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full py-8 flex items-center justify-between text-left group transition-all"
+      >
+        <span className={`text-lg font-serif tracking-tight transition-colors ${isOpen ? 'text-amber-600' : 'text-zinc-900 group-hover:text-amber-600'}`}>
+          {question}
+        </span>
+        <div className={`shrink-0 ml-4 transition-transform duration-500 ${isOpen ? 'rotate-180 text-amber-600' : 'text-zinc-400'}`}>
+          {isOpen ? <Minus size={20} /> : <Plus size={20} />}
+        </div>
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+            className="overflow-hidden"
+          >
+            <p className="pb-8 text-zinc-500 font-light leading-relaxed text-base max-w-3xl">
+              {answer}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const About: React.FC = () => {
   const collectionHighlights = [
@@ -9,28 +44,28 @@ const About: React.FC = () => {
       title: 'Private Collection',
       subtitle: 'The Pinnacle of Exclusivity',
       desc: 'Our most prestigious line, where cost is no object and rarity is the standard. Featuring precious ingredients like aged Oud, rare Saffron, and hand-picked Bulgarian Rose, these scents are designed for the true connoisseur who demands a signature that is as unique as their own fingerprint.',
-      image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800',
+      image: 'https://www.sedraperfumes.com/web/image/product.template/572/image_1024',
       id: 'Private'
     },
     {
       title: 'Luxury Collection',
       subtitle: 'Memories Captured in Glass',
       desc: 'Crafted for the grandest stages of life. Whether it is a royal wedding or a high-profile gala, the Luxury Collection offers opulent, long-lasting sillage that commands attention. These are deep, complex compositions that evolve beautifully over hours, leaving an unforgettable trail of elegance.',
-      image: 'https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=800',
+      image: 'https://www.sedraperfumes.com/web/image/product.template/21/image_1024',
       id: 'Luxury'
     },
     {
       title: 'Grande Collection',
       subtitle: 'Daily Sophistication',
       desc: 'Luxury should not be reserved solely for the evening. The Grande Collection brings Sedra’s signature refinement to your daily ritual. Fresh, invigorating, and modern, these fragrances are designed to transition seamlessly from the boardroom to a casual lunch, ensuring you always radiate confidence.',
-      image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=800',
+      image: 'https://www.sedraperfumes.com/web/image/product.template/22/image_1024',
       id: 'Grande'
     },
     {
       title: 'Femi Collection',
       subtitle: 'The Art of the Mist',
       desc: 'A delicate exploration of hair and body mists. The Femi Collection is a tribute to the soft, ethereal side of fragrance. Light enough for layering yet sophisticated enough to stand alone, these mists provide a gentle, refreshing aura that stays with you throughout the day.',
-      image: 'https://images.unsplash.com/photo-1615484477778-ca3b77940c25?auto=format&fit=crop&q=80&w=800',
+      image: 'https://www.sedraperfumes.com/web/image/product.template/25/image_1024',
       id: 'Femi'
     }
   ];
@@ -46,9 +81,9 @@ const About: React.FC = () => {
           className="absolute inset-0"
         >
           <img 
-            src="https://images.unsplash.com/photo-1616984748474-20a4d97756d9?auto=format&fit=crop&q=80&w=1920" 
+            src="https://www.sedraperfumes.com/web/image/product.template/574/image_1024" 
             alt="Luxury Fragrance" 
-            className="w-full h-full object-cover opacity-50"
+            className="w-full h-full object-contain opacity-40 p-24"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-white" />
@@ -105,11 +140,11 @@ const About: React.FC = () => {
               transition={{ duration: 1 }}
               className="relative"
             >
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-zinc-50 flex items-center justify-center p-12">
                 <img 
-                  src="https://images.unsplash.com/photo-1583467875263-d50dec37a88c?auto=format&fit=crop&q=80&w=800" 
+                  src="https://www.sedraperfumes.com/web/image/product.template/576/image_1024" 
                   alt="Fragrance Craftsmanship" 
-                  className="w-full h-full object-cover"
+                  className="max-h-full object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>
@@ -156,17 +191,50 @@ const About: React.FC = () => {
                   transition={{ duration: 1 }}
                   className="lg:w-1/2"
                 >
-                  <div className="aspect-video rounded-2xl overflow-hidden shadow-xl border border-zinc-200">
+                  <div className="aspect-video rounded-2xl overflow-hidden shadow-xl border border-zinc-200 bg-white flex items-center justify-center p-8">
                     <img 
                       src={col.image} 
                       alt={col.title} 
-                      className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+                      className="max-h-full object-contain transition-transform duration-1000 hover:scale-105"
                       referrerPolicy="no-referrer"
                     />
                   </div>
                 </motion.div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-32 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-20">
+            <span className="text-[10px] uppercase tracking-[0.6em] text-amber-600 font-bold mb-4 block">Curiosity</span>
+            <h2 className="text-4xl lg:text-6xl font-serif text-zinc-900 uppercase tracking-tight">Frequently Asked <span className="italic font-light text-zinc-400">Questions</span></h2>
+          </div>
+
+          <div className="space-y-2">
+            <FAQItem 
+              question="What makes Sedra fragrances unique?"
+              answer="Sedra fragrances are defined by their high concentration of pure perfume oils and the meticulous balance between traditional Oriental ingredients and modern Western olfactory structures. Each scent is a narrative, crafted over months to ensure a unique evolution on the skin."
+            />
+            <FAQItem 
+              question="How do I choose the right scent?"
+              answer="Choosing a scent is a personal journey. We recommend exploring our collections based on your preferred mood or occasion. Our Private Collection offers depth and exclusivity, while the Grande Collection is perfect for daily sophistication. You can also visit our Creative Studio for a guided discovery."
+            />
+            <FAQItem 
+              question="Are Sedra perfumes long-lasting?"
+              answer="Yes, all our fragrances are formulated as Extraits or high-concentration Eaux de Parfum. Due to the quality of our raw materials and the density of the compositions, they typically offer exceptional longevity and a memorable sillage that lasts throughout the day."
+            />
+            <FAQItem 
+              question="Do you offer international shipping?"
+              answer="Absolutely. We ship our luxury fragrances to over 50 countries worldwide. We use specialized logistics partners like DHL and FedEx to ensure your bottles are handled with care and delivered securely to your doorstep."
+            />
+            <FAQItem 
+              question="Can I layer different Sedra scents?"
+              answer="While each Sedra fragrance is a complete composition, our Femi Collection mists are specifically designed to be light enough for layering. Many of our clients enjoy layering a Femi mist over a Private Collection extrait to create a truly bespoke olfactory signature."
+            />
           </div>
         </div>
       </section>

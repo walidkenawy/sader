@@ -115,18 +115,31 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="pt-16 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
-          <p className="text-[8px] uppercase tracking-[0.5em] text-zinc-600 font-bold">
-            © {new Date().getFullYear()} Sedra Perfumes. All Rights Reserved.
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_logo%2C_revised_2016.svg" alt="Stripe" className="h-4 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-3 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-5 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="Amex" className="h-4 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Discover_Card_logo.svg" alt="Discover" className="h-3 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-4 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-4 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
+        <div className="pt-16 border-t border-zinc-800 flex flex-col space-y-12">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
+            <p className="text-[8px] uppercase tracking-[0.5em] text-zinc-600 font-bold">
+              © {new Date().getFullYear()} Sedra Perfumes. All Rights Reserved.
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_logo%2C_revised_2016.svg" alt="Stripe" className="h-4 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-3 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-5 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="Amex" className="h-4 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Discover_Card_logo.svg" alt="Discover" className="h-3 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-4 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
+              <div className="h-4 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500 flex items-center">
+                <span className="text-white font-black text-[10px] tracking-tighter">PayU</span>
+              </div>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-4 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500" referrerPolicy="no-referrer" />
+            </div>
+          </div>
+
+          <div className="flex flex-wrap justify-center items-center gap-8 pt-8 border-t border-zinc-800/50">
+            <span className="text-[8px] uppercase tracking-[0.4em] text-zinc-500 font-bold mr-4">Shipping Partners:</span>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/DHL_Logo.svg" alt="DHL" className="h-3 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500" referrerPolicy="no-referrer" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/FedEx_Express_logo.svg" alt="FedEx" className="h-4 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500" referrerPolicy="no-referrer" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/PostNL_logo.svg" alt="PostNL" className="h-4 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500" referrerPolicy="no-referrer" />
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f6/Royal_Mail_logo.svg/1200px-Royal_Mail_logo.svg.png" alt="Royal Mail" className="h-5 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500" referrerPolicy="no-referrer" />
           </div>
         </div>
       </div>

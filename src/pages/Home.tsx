@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, ShieldCheck, Truck, RotateCcw, ArrowUp } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
@@ -38,23 +39,36 @@ const Home: React.FC = () => {
 
   const collections = [
     { 
-      id: 'Private', 
+      id: 'private-collection-luxury-perfumes', 
+      category: 'Private',
       title: 'Private Collection', 
-      desc: 'A masterpiece of refined luxury, crafted for those who seek exclusivity beyond the ordinary. Each fragrance reflects timeless elegance, sophistication, and unmatched distinction.',
+      desc: 'A masterpiece of refined luxury, crafted for those who seek exclusivity beyond the ordinary. Each fragrance reflects timeless elegance, sophistication, and unmatched distinction. It is the pinnacle of Sedra’s olfactory artistry, blending traditional oriental notes with modern scent profiles.',
       image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=1200',
-      video: '/video_9.mp4'
+      video: '/video_9.mp4',
+      keywords: 'exclusive perfumes, niche fragrances, luxury scent, oriental elegance'
     },
     { 
-      id: 'Luxury', 
+      id: 'luxury-fragrance-collection', 
+      category: 'Luxury',
       title: 'Luxury Collection', 
-      desc: 'Sedra’s premium line for special occasions and memorable moments. Sophisticated, rich, and long-lasting scents that highlight elegance and exclusivity.',
+      desc: 'Sedra’s premium line for life’s most significant milestones. These are sophisticated, rich, and long-lasting scents that highlight elegance and exclusivity, turning every moment into a lasting memory. Perfect for weddings, formal events, and high-end gifting.',
       image: 'https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=1200',
-      video: '/video_5.mp4'
+      video: '/video_5.mp4',
+      keywords: 'premium perfumes, long-lasting scents, special occasion fragrance, luxury gift'
     }
   ];
 
   return (
     <div className="pt-20">
+      <Helmet>
+        <title>Sedra Perfumes | Luxury Oriental Fragrances & Collections</title>
+        <meta name="description" content="Discover Sedra Perfumes, a Kuwaiti luxury fragrance brand blending oriental richness with modern elegance. Explore our Private, Luxury, Grande, and Femi collections." />
+        <meta name="keywords" content="luxury perfumes, oriental fragrances, Kuwait perfumes, Sedra, Private Collection, Luxury Collection, Femi Mist" />
+        <meta property="og:title" content="Sedra Perfumes | Luxury Oriental Fragrances" />
+        <meta property="og:description" content="Experience the essence of delicate luxury with Sedra Perfumes. Unique scents designed to reflect personality." />
+        <meta property="og:image" content="https://www.sedraperfumes.com/web/image/product.template/572/image_1024" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-zinc-900">
         <motion.div 
@@ -132,7 +146,11 @@ const Home: React.FC = () => {
       </section>
 
       {/* Brand Story Block */}
-      <section className="py-32 px-6 bg-white overflow-hidden">
+      <section 
+        id="about-sedra-perfumes-kuwaiti-luxury"
+        aria-label="About Sedra Perfumes - Kuwaiti luxury fragrance brand"
+        className="py-32 px-6 bg-white overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <motion.div 
             initial={{ x: -50, opacity: 0 }}
@@ -172,7 +190,11 @@ const Home: React.FC = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-32 px-6 bg-[#FAFAFA] overflow-hidden">
+      <section 
+        id="featured-luxury-perfumes-selection"
+        aria-label="Featured luxury perfumes and oriental fragrances"
+        className="py-32 px-6 bg-[#FAFAFA] overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
@@ -218,7 +240,8 @@ const Home: React.FC = () => {
       {collections.map((col, idx) => (
         <section 
           key={col.id} 
-          id={idx === 0 ? 'collections-section' : undefined}
+          id={col.id}
+          aria-label={`${col.title} - ${col.keywords}`}
           className={`py-32 px-6 ${idx % 2 === 0 ? 'bg-[#FAFAFA]' : 'bg-white'}`}
         >
           <div className="max-w-7xl mx-auto">
@@ -250,7 +273,7 @@ const Home: React.FC = () => {
                 >
                   {col.desc}
                 </motion.p>
-                <Link to={`/shop?category=${col.id}`} className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 hover:text-amber-600 transition-all border-b border-zinc-200 pb-1 hover:border-amber-600">
+                <Link to={`/shop?category=${col.category}`} className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 hover:text-amber-600 transition-all border-b border-zinc-200 pb-1 hover:border-amber-600">
                   Shop {col.title}
                 </Link>
               </div>
@@ -284,7 +307,7 @@ const Home: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
-              {PRODUCTS.filter(p => p.category === col.id).slice(0, 4).map(product => (
+              {PRODUCTS.filter(p => p.category === col.category).slice(0, 4).map(product => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
@@ -293,7 +316,11 @@ const Home: React.FC = () => {
       ))}
 
       {/* Grande Collection Spotlight - Prominent Video Section */}
-      <section className="relative h-[80vh] flex items-center overflow-hidden bg-zinc-900">
+      <section 
+        id="grande-collection-everyday-perfumes"
+        aria-label="Grande Collection - fresh, versatile, modern fragrances for daily wear"
+        className="relative h-[80vh] flex items-center overflow-hidden bg-zinc-900"
+      >
         <div className="absolute inset-0">
           <ViewportVideo
             src="/video_4.mp4"
@@ -351,10 +378,16 @@ const Home: React.FC = () => {
       </section>
 
       {/* Femi Collection Spotlight - Prominent Video Section */}
-      <section className="relative h-[80vh] flex items-center overflow-hidden bg-zinc-900">
+      <section 
+        id="femi-collection-hair-body-mists"
+        aria-label="Femi Collection - refreshing hair and body mists for delicate luxury"
+        className="relative h-[80vh] flex items-center overflow-hidden bg-zinc-900"
+      >
         <div className="absolute inset-0">
           <ViewportVideo
-            src="/video_4.mp4"
+            src="/videos/video_femi_collection.mp4"
+            poster="/images/femi_poster.jpg"
+            autoPlay
             className="w-full h-full object-cover opacity-50"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
@@ -409,7 +442,11 @@ const Home: React.FC = () => {
       </section>
 
       {/* Cinematics Teaser */}
-      <section id="cinematics-teaser" className="py-32 px-6 bg-zinc-950 text-white overflow-hidden">
+      <section 
+        id="sedra-perfumes-cinematic-experience"
+        aria-label="Sedra Perfumes Cinematic Experience - The Art of Scent"
+        className="py-32 px-6 bg-zinc-950 text-white overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/2">

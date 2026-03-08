@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X, ShoppingBag, Wind, Heart, Trees } from 'lucide-react';
 import { Product } from '../types';
 import { useCart } from '../context/CartContext';
+import { useCurrency } from '../context/CurrencyContext';
 
 interface QuickViewModalProps {
   product: Product | null;
@@ -12,6 +13,7 @@ interface QuickViewModalProps {
 
 const QuickViewModal: React.FC<QuickViewModalProps> = ({ product, isOpen, onClose }) => {
   const { addToCart } = useCart();
+  const { formatPrice } = useCurrency();
 
   if (!product) return null;
 
@@ -65,7 +67,7 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ product, isOpen, onClos
                 </h2>
                 
                 <div className="text-2xl font-light text-zinc-900 mb-8 tracking-widest">
-                  {product.price.toFixed(3)} {product.currency}
+                  {formatPrice(product.price)}
                 </div>
 
                 <p className="text-zinc-500 leading-relaxed text-sm mb-10 font-light line-clamp-3">
