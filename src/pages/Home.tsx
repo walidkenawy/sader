@@ -1,12 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Truck, RotateCcw, ArrowUp } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import ProductCard from '../components/ProductCard';
 import ViewportVideo from '../components/ViewportVideo';
 
 const Home: React.FC = () => {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 800) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const collections = [
     { 
       id: 'Private', 
@@ -35,11 +64,11 @@ const Home: React.FC = () => {
           className="absolute inset-0"
         >
           <ViewportVideo
-            src="/video_10.mp4"
-            className="w-full h-full object-cover opacity-60"
+            src="/video_1.mp4"
+            className="w-full h-full object-cover opacity-70"
           />
           {/* Dark overlay for readability */}
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-black/40" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
         </motion.div>
 
@@ -50,8 +79,8 @@ const Home: React.FC = () => {
             transition={{ delay: 0.5, duration: 1 }}
             className="mb-8"
           >
-            <span className="text-[10px] lg:text-xs uppercase tracking-[0.8em] font-bold text-[#D4AF37]">
-              Exclusivity Beyond the Ordinary
+            <span className="text-[10px] lg:text-xs uppercase tracking-[1em] font-bold text-amber-500">
+              A Symphony of Oriental Elegance
             </span>
           </motion.div>
           
@@ -59,14 +88,14 @@ const Home: React.FC = () => {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.8, duration: 1.2 }}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center mb-12"
           >
-            <h2 className="text-8xl lg:text-[180px] font-serif mb-4 leading-[0.8] tracking-tight uppercase font-bold text-white">
-              Nero
+            <h1 className="text-7xl lg:text-[160px] font-serif mb-4 leading-[0.8] tracking-tighter uppercase font-bold text-white">
+              Sedra
+            </h1>
+            <h2 className="text-xl lg:text-3xl font-light text-amber-500/80 tracking-[0.6em] uppercase">
+              Private Collection
             </h2>
-            <h3 className="text-2xl lg:text-4xl font-light text-[#D4AF37] tracking-[0.4em] uppercase mb-12">
-              Grand Collection
-            </h3>
           </motion.div>
 
           <motion.div
@@ -75,12 +104,18 @@ const Home: React.FC = () => {
             transition={{ delay: 1.1, duration: 1 }}
             className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8"
           >
-            <Link to="/shop" className="group relative px-12 py-5 bg-white text-zinc-900 text-[10px] uppercase tracking-[0.3em] font-bold overflow-hidden rounded-full transition-all duration-500 hover:bg-[#D4AF37] hover:text-white">
-              <span className="relative z-10">Explore Collections</span>
-            </Link>
-            <Link to="/about" className="px-12 py-5 border border-white/30 backdrop-blur-sm text-white text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-white hover:text-zinc-900 transition-all duration-500 rounded-full">
-              Our Story
-            </Link>
+            <button 
+              onClick={() => scrollToSection('collections-section')}
+              className="group relative px-16 py-6 bg-white text-zinc-900 text-[10px] uppercase tracking-[0.4em] font-bold overflow-hidden rounded-full transition-all duration-500 hover:bg-amber-500 hover:text-white shadow-2xl shadow-white/10"
+            >
+              <span className="relative z-10">Shop the Collection</span>
+            </button>
+            <button 
+              onClick={() => scrollToSection('cinematics-teaser')}
+              className="px-16 py-6 border border-white/20 backdrop-blur-md text-white text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-white hover:text-zinc-900 transition-all duration-500 rounded-full"
+            >
+              Watch the Film
+            </button>
           </motion.div>
         </div>
 
@@ -181,7 +216,11 @@ const Home: React.FC = () => {
 
       {/* Collection Sections */}
       {collections.map((col, idx) => (
-        <section key={col.id} className={`py-32 px-6 ${idx % 2 === 0 ? 'bg-[#FAFAFA]' : 'bg-white'}`}>
+        <section 
+          key={col.id} 
+          id={idx === 0 ? 'collections-section' : undefined}
+          className={`py-32 px-6 ${idx % 2 === 0 ? 'bg-[#FAFAFA]' : 'bg-white'}`}
+        >
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20 items-center">
               <div className={idx % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}>
@@ -370,7 +409,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Cinematics Teaser */}
-      <section className="py-32 px-6 bg-zinc-950 text-white overflow-hidden">
+      <section id="cinematics-teaser" className="py-32 px-6 bg-zinc-950 text-white overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/2">
@@ -511,6 +550,22 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Back to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.5, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.5, y: 20 }}
+            onClick={scrollToTop}
+            className="fixed bottom-10 right-10 z-[70] w-14 h-14 bg-white text-zinc-900 rounded-full shadow-2xl flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all duration-500 group border border-zinc-100"
+            aria-label="Back to Top"
+          >
+            <ArrowUp size={20} className="group-hover:-translate-y-1 transition-transform duration-500" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
