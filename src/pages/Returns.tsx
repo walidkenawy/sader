@@ -100,7 +100,7 @@ const Returns: React.FC = () => {
             <div className="p-10 border border-zinc-100 rounded-3xl text-center">
               <Mail size={24} className="text-amber-600 mx-auto mb-6" />
               <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-zinc-900 mb-4">Contact</h3>
-              <p className="text-[11px] text-zinc-500 leading-relaxed uppercase tracking-wider font-light">
+              <p className="text-[11px] text-zinc-500 leading-relaxed tracking-wider font-light lowercase">
                 care@sedraperfumes.com
               </p>
             </div>

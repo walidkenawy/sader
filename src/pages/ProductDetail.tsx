@@ -35,8 +35,18 @@ const ProductDetail: React.FC = () => {
   const { formatPrice } = useCurrency();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
+  const [zoomPos, setZoomPos] = useState({ x: 0, y: 0 });
+  const [isZoomed, setIsZoomed] = useState(false);
 
   const product = useMemo(() => PRODUCTS.find(p => p.id === id), [id]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setZoomPos({ x, y });
+  };
+
   const isWishlisted = product ? isInWishlist(product.id) : false;
   const relatedProducts = useMemo(() => 
     PRODUCTS.filter(p => p.category === product?.category && p.id !== id).slice(0, 8),
@@ -115,16 +125,24 @@ const ProductDetail: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="aspect-[4/5] bg-[#F9F9F9] overflow-hidden flex items-center justify-center relative rounded-2xl"
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsZoomed(true)}
+            onMouseLeave={() => setIsZoomed(false)}
+            className="aspect-[4/5] bg-[#F9F9F9] overflow-hidden flex items-center justify-center relative rounded-2xl cursor-zoom-in"
           >
-            <img 
+            <motion.img 
               src={product.image} 
               alt={product.name} 
-              className="max-h-[85%] object-contain transition-transform duration-[2s] hover:scale-110"
+              animate={{
+                scale: isZoomed ? 2 : 1,
+                transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`
+              }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="max-h-[85%] object-contain"
               referrerPolicy="no-referrer"
             />
             {product.isNew && (
-              <span className="absolute top-4 left-4 sm:top-10 sm:left-10 bg-zinc-900 text-white text-[6px] sm:text-[8px] uppercase tracking-[0.4em] px-3 py-1.5 sm:px-5 sm:py-2 font-bold">New Arrival</span>
+              <span className="absolute top-4 left-4 sm:top-10 sm:left-10 bg-zinc-900 text-white text-[6px] sm:text-[8px] uppercase tracking-[0.4em] px-3 py-1.5 sm:px-5 sm:py-2 font-bold z-10">New Arrival</span>
             )}
           </motion.div>
 
@@ -147,6 +165,13 @@ const ProductDetail: React.FC = () => {
             <div className="text-lg sm:text-2xl lg:text-3xl font-light text-zinc-900 mb-6 sm:mb-10 tracking-widest">
               {formatPrice(product.price)}
             </div>
+
+            {product.olfactoryFamily && (
+              <div className="mb-6 flex items-center space-x-3">
+                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">Olfactory Family:</span>
+                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-amber-600">{product.olfactoryFamily}</span>
+              </div>
+            )}
 
             {product.mood && (
               <div className="flex flex-wrap gap-2 mb-8">

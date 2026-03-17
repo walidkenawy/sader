@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter, MapPin, Phone, Mail, MessageCircle } from 'lucide-react';
+import { Instagram, Facebook, X, Linkedin, Youtube, MapPin, Phone, Mail } from 'lucide-react';
+import { motion } from 'motion/react';
 
 const TikTokIcon = ({ size = 18 }: { size?: number }) => (
   <svg 
@@ -14,6 +15,22 @@ const TikTokIcon = ({ size = 18 }: { size?: number }) => (
     strokeLinejoin="round"
   >
     <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+);
+
+const WhatsAppIcon = ({ size = 18 }: { size?: number }) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="1.5" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-7.6 8.38 8.38 0 0 1 3.8.9L21 7.5z" />
+    <path d="M17 10c-.5-1-2.5-1-3 0-1 2 1 3 3 3 1 0 2.5-1 3-2" />
   </svg>
 );
 
@@ -33,8 +50,8 @@ const Footer: React.FC = () => {
             <div className="flex-1 w-full">
               <input 
                 type="email" 
-                placeholder="EMAIL ADDRESS" 
-                className="w-full bg-transparent border-b border-zinc-700 py-4 text-[10px] tracking-[0.3em] uppercase focus:border-amber-500 outline-none transition-colors"
+                placeholder="email address" 
+                className="w-full bg-transparent border-b border-zinc-700 py-4 text-[10px] tracking-[0.3em] lowercase focus:border-amber-500 outline-none transition-colors"
               />
             </div>
             <button className="px-12 py-4 bg-white text-zinc-900 text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-amber-600 hover:text-white transition-all duration-500">
@@ -46,10 +63,15 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
           {/* Brand Column */}
           <div className="space-y-10">
-            <div className="flex flex-col">
-              <span className="text-2xl font-serif tracking-[0.3em] uppercase font-light">Sedra</span>
-              <span className="text-[8px] uppercase tracking-[0.6em] text-zinc-500">Perfumes</span>
-            </div>
+            <Link to="/" className="flex flex-col">
+              <motion.img 
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                src="https://storage.googleapis.com/static.aistudio.google.com/content-attachments/input_file_0.png" 
+                alt="Sedra Perfumes" 
+                className="h-16 w-auto object-contain brightness-0 invert"
+              />
+            </Link>
             <p className="text-zinc-400 text-xs leading-relaxed tracking-widest uppercase font-light">
               Sedra is a Kuwaiti luxury fragrance brand that combines oriental richness with modern elegance. We create unique scents designed to reflect personality and leave a lasting impression.
             </p>
@@ -57,17 +79,23 @@ const Footer: React.FC = () => {
               <a href="https://www.instagram.com/sedraperfumes" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
                 <Instagram size={18} strokeWidth={1.5} />
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
+              <a href="https://www.facebook.com/sedraperfumes" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
                 <Facebook size={18} strokeWidth={1.5} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
-                <Twitter size={18} strokeWidth={1.5} />
+              <a href="https://x.com/sedraperfumes" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
+                <X size={18} strokeWidth={1.5} />
               </a>
               <a href="https://www.tiktok.com/@sedraperfumeskw" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
                 <TikTokIcon size={18} />
               </a>
-              <a href="https://wa.me/96599338381" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
-                <MessageCircle size={18} strokeWidth={1.5} />
+              <a href="https://www.linkedin.com/company/sedra-perfumes" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
+                <Linkedin size={18} strokeWidth={1.5} />
+              </a>
+              <a href="https://www.youtube.com/@sedraperfumes" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors">
+                <Youtube size={18} strokeWidth={1.5} />
+              </a>
+              <a href="https://wa.me/447700183296" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-amber-500 transition-colors" title="WhatsApp UK">
+                <WhatsAppIcon size={18} />
               </a>
             </div>
           </div>
@@ -98,18 +126,39 @@ const Footer: React.FC = () => {
           {/* Contact Info */}
           <div>
             <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold mb-10 text-zinc-500">Contact</h4>
-            <ul className="space-y-8 text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-bold">
-              <li className="flex items-start space-x-4">
+            <ul className="space-y-8 text-[10px] tracking-[0.2em] text-zinc-400 font-bold">
+              <li className="flex items-start space-x-4 uppercase">
                 <MapPin size={16} strokeWidth={1.5} className="text-amber-600 shrink-0 mt-0.5" />
-                <span>Kuwait City, Kuwait</span>
+                <div className="flex flex-col">
+                  <span className="text-[8px] text-amber-600 font-bold tracking-widest mb-1">Kuwait</span>
+                  <span>Kuwait City, Kuwait</span>
+                </div>
               </li>
-              <li className="flex items-center space-x-4">
-                <Phone size={16} strokeWidth={1.5} className="text-amber-600 shrink-0" />
-                <span>+965 9933 8381</span>
+              <li className="flex items-start space-x-4 uppercase">
+                <MapPin size={16} strokeWidth={1.5} className="text-amber-600 shrink-0 mt-0.5" />
+                <div className="flex flex-col">
+                  <span className="text-[8px] text-amber-600 font-bold tracking-widest mb-1">UK</span>
+                  <span>5 Brayford Square, London, E1 0SG</span>
+                </div>
               </li>
-              <li className="flex items-center space-x-4">
-                <Mail size={16} strokeWidth={1.5} className="text-amber-600 shrink-0" />
-                <span>info@sedraperfumes.com</span>
+              <li className="flex items-start space-x-4">
+                <Phone size={16} strokeWidth={1.5} className="text-amber-600 shrink-0 mt-0.5" />
+                <div className="flex flex-col space-y-1">
+                  <span>+965 9933 8381</span>
+                  <a href="https://wa.me/447700183296" target="_blank" rel="noopener noreferrer" className="hover:text-amber-500 transition-colors flex items-center gap-2">
+                    <span>+44 7700 183296</span>
+                    <WhatsAppIcon size={12} />
+                  </a>
+                  <span>+48 739 256 482</span>
+                </div>
+              </li>
+              <li className="flex items-start space-x-4">
+                <Mail size={16} strokeWidth={1.5} className="text-amber-600 shrink-0 mt-0.5" />
+                <div className="flex flex-col space-y-1 lowercase">
+                  <span>info@sedraperfumes.com</span>
+                  <span>admin@sedraperfumes.eu</span>
+                  <span>admin@sedraperfumes.co.uk</span>
+                </div>
               </li>
             </ul>
           </div>

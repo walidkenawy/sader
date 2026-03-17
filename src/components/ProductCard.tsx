@@ -5,7 +5,7 @@ import { Product } from '../types';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useCurrency } from '../context/CurrencyContext';
-import { motion, AnimatePresence, useInView } from 'motion/react';
+import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'motion/react';
 import QuickViewModal from './QuickViewModal';
 
 interface ProductCardProps {
@@ -21,6 +21,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const isWishlisted = isInWishlist(product.id);
+
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [-15, 15]);
 
   const shareUrl = `${window.location.origin}/product/${product.id}`;
   const shareText = `Check out ${product.name} at Sedra Perfumes!`;
@@ -47,6 +55,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <>
       <motion.div 
+        ref={cardRef}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -57,7 +66,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="relative aspect-[4/5] bg-[#F9F9F9] overflow-hidden mb-8 flex items-center justify-center transition-all duration-700 rounded-2xl group-hover:shadow-2xl group-hover:shadow-zinc-200/50 group-hover:-translate-y-1">
           <Link to={`/product/${product.id}`} className="w-full h-full flex items-center justify-center p-10 sm:p-14 relative">
             {product.video ? (
-              <video
+              <motion.video
+                style={{ y }}
                 ref={videoRef}
                 muted
                 loop
@@ -65,9 +75,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-all duration-1000 scale-110 group-hover:scale-100"
               >
                 <source src={product.video} type="video/mp4" />
-              </video>
+              </motion.video>
             ) : null}
-            <img 
+            <motion.img 
+              style={{ y }}
               src={product.image} 
               alt={product.name} 
               className={`max-h-full object-contain transition-all duration-1000 group-hover:scale-110 ${product.video ? 'group-hover:opacity-0 group-hover:scale-125' : ''}`}
@@ -121,7 +132,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               <span className="bg-amber-600 text-white text-[8px] uppercase tracking-[0.4em] px-4 py-2 font-bold rounded-full shadow-lg shadow-amber-600/20">New</span>
             )}
           </div>
-
+ 
           {/* Wishlist Button */}
           <button 
             onClick={(e) => {
@@ -136,23 +147,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           >
             <Heart size={15} fill={isWishlisted ? "currentColor" : "none"} strokeWidth={isWishlisted ? 0 : 1.5} />
           </button>
-
+ 
           {/* Quick Actions Overlay */}
           <div className="absolute inset-x-4 bottom-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out flex flex-col gap-2 z-20">
             <button 
               onClick={() => setIsQuickViewOpen(true)}
-              className="w-full py-3.5 bg-white/95 backdrop-blur-md text-zinc-900 text-[10px] uppercase tracking-[0.4em] font-bold flex items-center justify-center space-x-2 hover:bg-zinc-900 hover:text-white transition-all rounded-xl shadow-xl"
+              className="w-full py-3.5 bg-white/95 backdrop-blur-md text-zinc-900 text-[10px] uppercase tracking-[0.4em] font-bold flex items-center justify-center space-x-2 hover:bg-zinc-900 hover:text-white transition-all rounded-xl shadow-xl active:scale-95"
             >
               <Eye size={14} />
               <span>Quick View</span>
             </button>
-            <button 
+            <motion.button 
+              whileTap={{ scale: 0.95 }}
               onClick={() => addToCart(product)}
               className="w-full py-4 bg-zinc-900/95 backdrop-blur-md text-white text-[10px] uppercase tracking-[0.4em] font-bold flex items-center justify-center space-x-2 hover:bg-amber-600 transition-all rounded-xl shadow-xl"
             >
               <ShoppingBag size={14} />
               <span>Add to Cart</span>
-            </button>
+            </motion.button>
           </div>
         </div>
 

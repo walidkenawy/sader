@@ -21,9 +21,22 @@ const Cinematics: React.FC = () => {
     <div className="pt-32 pb-24 px-6 bg-zinc-950 min-h-screen text-white">
       <div className="max-w-7xl mx-auto">
         <header className="mb-24 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="mb-12 flex justify-center"
+          >
+            <img 
+              src="https://storage.googleapis.com/static.aistudio.google.com/content-attachments/input_file_0.png" 
+              alt="Sedra Logo" 
+              className="h-24 lg:h-32 w-auto object-contain brightness-0 invert opacity-60"
+            />
+          </motion.div>
           <motion.span 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
             className="text-[10px] uppercase tracking-[0.8em] text-amber-500 font-bold mb-6 block"
           >
             Visual Storytelling

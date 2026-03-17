@@ -90,9 +90,22 @@ const About: React.FC = () => {
         </motion.div>
 
         <div className="relative z-10 text-center px-6 max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="mb-12 flex justify-center"
+          >
+            <img 
+              src="https://storage.googleapis.com/static.aistudio.google.com/content-attachments/input_file_0.png" 
+              alt="Sedra Logo" 
+              className="h-32 lg:h-48 w-auto object-contain brightness-0 invert opacity-80"
+            />
+          </motion.div>
           <motion.span 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
             className="text-[10px] uppercase tracking-[0.8em] text-amber-500 font-bold mb-8 block"
           >
             Our Legacy
@@ -140,11 +153,19 @@ const About: React.FC = () => {
               transition={{ duration: 1 }}
               className="relative"
             >
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-zinc-50 flex items-center justify-center p-12">
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-zinc-50 flex flex-col items-center justify-center p-12 relative">
+                <motion.img 
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 0.05 }}
+                  viewport={{ once: true }}
+                  src="https://storage.googleapis.com/static.aistudio.google.com/content-attachments/input_file_0.png" 
+                  alt="Watermark" 
+                  className="absolute inset-0 w-full h-full object-contain p-12 brightness-0 pointer-events-none"
+                />
                 <img 
                   src="https://www.sedraperfumes.com/web/image/product.template/576/image_1024" 
                   alt="Fragrance Craftsmanship" 
-                  className="max-h-full object-contain"
+                  className="max-h-full object-contain relative z-10"
                   referrerPolicy="no-referrer"
                 />
               </div>

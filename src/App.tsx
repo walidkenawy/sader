@@ -12,6 +12,7 @@ import { CurrencyProvider } from './context/CurrencyContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ChatBot from './components/ChatBot';
+import GDPRBanner from './components/GDPRBanner';
 import AnnouncementBar from './components/AnnouncementBar';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
@@ -68,6 +69,7 @@ export default function App() {
       
                 <Footer />
                 <ChatBot />
+                <GDPRBanner />
               </div>
             </CartProvider>
           </WishlistProvider>

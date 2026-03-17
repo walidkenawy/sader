@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, ShieldCheck, Truck, RotateCcw, ArrowUp } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Truck, RotateCcw, ArrowUp, MapPin } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import ProductCard from '../components/ProductCard';
 import ViewportVideo from '../components/ViewportVideo';
@@ -173,7 +173,17 @@ const Home: React.FC = () => {
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
+            className="relative"
           >
+            <motion.img 
+              initial={{ opacity: 0, scale: 1.2 }}
+              whileInView={{ opacity: 0.03, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 2 }}
+              src="https://storage.googleapis.com/static.aistudio.google.com/content-attachments/input_file_0.png" 
+              alt="Background Logo" 
+              className="absolute -top-24 -right-24 w-96 h-96 object-contain brightness-0 pointer-events-none"
+            />
             <span className="text-[10px] uppercase tracking-[0.6em] text-amber-600 font-bold mb-8 block">About Us</span>
             <h2 className="text-5xl lg:text-7xl font-serif text-zinc-900 mb-10 leading-[1.1] uppercase tracking-wider">SEDRA <br /> <span className="italic font-light text-zinc-400">PERFUMES</span></h2>
             <p className="text-zinc-600 leading-relaxed mb-10 text-lg font-light">
@@ -551,6 +561,61 @@ const Home: React.FC = () => {
               <span>View Full Gallery</span>
               <ArrowRight size={16} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Global Presence Section */}
+      <section className="py-32 px-6 bg-zinc-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <motion.span 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-[10px] uppercase tracking-[0.8em] text-amber-600 font-bold mb-6 block"
+            >
+              Our Presence
+            </motion.span>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-5xl lg:text-7xl font-serif text-zinc-900 mb-8 uppercase tracking-tight"
+            >
+              Global <span className="italic font-light text-zinc-400">Ateliers</span>
+            </motion.h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="p-12 bg-white rounded-[2rem] border border-zinc-100 shadow-sm hover:shadow-xl transition-all duration-500"
+            >
+              <MapPin className="text-amber-600 mb-8" size={32} strokeWidth={1} />
+              <h3 className="text-2xl font-serif text-zinc-900 mb-4 uppercase tracking-wider text-center md:text-left">Kuwait Boutique</h3>
+              <p className="text-zinc-500 font-light text-sm leading-relaxed uppercase tracking-widest text-center md:text-left">
+                Al Hamra Tower, Floor 45<br />
+                Kuwait City, Kuwait
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="p-12 bg-white rounded-[2rem] border border-zinc-100 shadow-sm hover:shadow-xl transition-all duration-500"
+            >
+              <MapPin className="text-amber-600 mb-8" size={32} strokeWidth={1} />
+              <h3 className="text-2xl font-serif text-zinc-900 mb-4 uppercase tracking-wider text-center md:text-left">UK Boutique</h3>
+              <p className="text-zinc-500 font-light text-sm leading-relaxed uppercase tracking-widest text-center md:text-left">
+                5 Brayford Square<br />
+                London, E1 0SG
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>

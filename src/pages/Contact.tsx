@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, Clock } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -67,8 +67,9 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 mb-2">Email Us</h4>
-                  <p className="text-zinc-500 font-light">info@sedraperfumes.com</p>
-                  <p className="text-zinc-500 font-light">support@sedraperfumes.com</p>
+                  <p className="text-zinc-500 font-light text-sm">info@sedraperfumes.com</p>
+                  <p className="text-zinc-500 font-light text-sm">admin@sedraperfumes.eu</p>
+                  <p className="text-zinc-500 font-light text-sm">admin@sedraperfumes.co.uk</p>
                 </div>
               </div>
 
@@ -79,7 +80,8 @@ const Contact: React.FC = () => {
                 <div>
                   <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 mb-2">Call Us</h4>
                   <p className="text-zinc-500 font-light">+965 2222 3333</p>
-                  <p className="text-zinc-500 font-light">Mon - Fri, 9am - 6pm</p>
+                  <p className="text-zinc-500 font-light">+48 739 256 482</p>
+                  <p className="text-zinc-500 font-light">+44 7700 183296</p>
                 </div>
               </div>
 
@@ -87,10 +89,33 @@ const Contact: React.FC = () => {
                 <div className="w-12 h-12 rounded-full bg-zinc-50 flex items-center justify-center text-amber-600 border border-zinc-100 group-hover:bg-amber-600 group-hover:text-white transition-all duration-500">
                   <MapPin size={20} strokeWidth={1.5} />
                 </div>
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 mb-2">Kuwait Boutique</h4>
+                    <p className="text-zinc-500 font-light text-sm">Al Hamra Tower, Floor 45</p>
+                    <p className="text-zinc-500 font-light text-sm">Kuwait City, Kuwait</p>
+                  </div>
+                  <div>
+                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 mb-2">UK Boutique</h4>
+                    <p className="text-zinc-500 font-light text-sm">5 Brayford Square</p>
+                    <p className="text-zinc-500 font-light text-sm">London, E1 0SG</p>
+                  </div>
+                  <div>
+                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 mb-2">Kington Address</h4>
+                    <p className="text-zinc-500 font-light text-sm">61 Bridge Street</p>
+                    <p className="text-zinc-500 font-light text-sm">Kington, HR5 3DJ</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-6 group">
+                <div className="w-12 h-12 rounded-full bg-zinc-50 flex items-center justify-center text-amber-600 border border-zinc-100 group-hover:bg-amber-600 group-hover:text-white transition-all duration-500">
+                  <Clock size={20} strokeWidth={1.5} />
+                </div>
                 <div>
-                  <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 mb-2">Visit Our Boutique</h4>
-                  <p className="text-zinc-500 font-light">Al Hamra Tower, Floor 45</p>
-                  <p className="text-zinc-500 font-light">Kuwait City, Kuwait</p>
+                  <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-900 mb-2">Office Hours</h4>
+                  <p className="text-zinc-500 font-light text-sm">Monday—Friday: 9:00AM–6:00PM</p>
+                  <p className="text-zinc-500 font-light text-[10px] uppercase tracking-widest mt-1">Excluding Public Holidays</p>
                 </div>
               </div>
             </motion.div>

@@ -19,6 +19,7 @@ export interface Product {
     heart: string[];
     base: string[];
   };
+  olfactoryFamily?: string;
 }
 
 export interface CartItem extends Product {
